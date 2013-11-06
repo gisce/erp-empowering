@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from osv import osv, fields
 from empowering.service import Empowering
-from empowering.utils import make_uuid, false_to_none, make_utc_timestamp, \
+from empowering.utils import make_uuid, remove_none, make_utc_timestamp, \
     none_to_false
 
 
@@ -180,7 +180,7 @@ class GiscedataPolissa(osv.osv):
                                           comptador.id)
                 })
             contract['devices'] = devices
-            res.append(false_to_none(contract, context))
+            res.append(remove_none(contract, context))
         return res
 
 GiscedataPolissa()
