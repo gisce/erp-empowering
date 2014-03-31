@@ -2,7 +2,7 @@
 {
     "name": "Empowering API",
     "version": "0-dev",
-    "depends": ["base", "giscedata_polissa", "giscedata_lectures"],
+    "depends": ["base", "giscedata_polissa", "giscedata_lectures", "oorq"],
     "author": "GISCE-TI, S.L.",
     "category": "Misc",
     "description": """

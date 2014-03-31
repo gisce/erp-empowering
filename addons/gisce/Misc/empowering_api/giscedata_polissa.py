@@ -2,6 +2,7 @@
 from osv import osv, fields
 from empowering.utils import make_uuid, remove_none, make_utc_timestamp, \
     none_to_false
+from oorq.decorators import job
 
 
 def get_street_name(cups):
@@ -64,6 +65,7 @@ class GiscedataPolissa(osv.osv):
             self.empowering_post(cursor, uid, react, {'react': True})
         return res
 
+    @job(queue='empowering')
     def empowering_patch(self, cursor, uid, ids, fields, context=None):
         em = self.pool.get('empowering.api').service
         result = []
@@ -74,6 +76,7 @@ class GiscedataPolissa(osv.osv):
             self.write(cursor, uid, [polissa.id], {'etag': res['etag']})
         return result
 
+    @job(queue='empowering')
     def empowering_post(self, cursor, uid, ids, context=None):
         em = self.pool.get('empowering.api').service
         data = self.empowering_data(cursor, uid, ids, context)
