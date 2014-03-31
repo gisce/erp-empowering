@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from osv import osv, fields
-from empowering.service import Empowering
 from empowering.utils import make_uuid, remove_none, make_utc_timestamp, \
     none_to_false
 
@@ -34,17 +33,6 @@ class GiscedataPolissa(osv.osv):
         'etag': fields.char('ETag', size=50),
     }
 
-    EMPOWERING_MAP = {
-        'pagador': ['payerId'],
-        'titular': ['ownerId'],
-        'potencia': ['power'],
-        'cups': ['customer', 'address', 'meteringPointId'],
-        'comptadors': ['devices'],
-        'cnae': ['activityCode'],
-        'tarifa': ['tariffId'],
-
-    }
-
     def wkf_activa(self, cursor, uid, ids):
         # Search for reactivations
         react = []
@@ -62,7 +50,12 @@ class GiscedataPolissa(osv.osv):
             # Busquem les diferències entre la modcon anterior i l'actual
             # per passar-ho per post
             for polissa in self.browse(cursor, uid, ids):
-                changes = self.EMPOWERING_MAP.copy()
+                modcon_id = polissa.modcontractual_activa.modcontractual_ant
+                modcon_id = modcon_id and modcon_id.id or False
+                ctx = {}
+                if modcon_id:
+                    ctx['modcon_id'] = modcon_id
+                changes = polissa.get_changes(context=ctx).keys()
                 self.empowering_patch(cursor, uid, [polissa.id], changes)
         if noves:
             self.empowering_post(cursor, uid, noves)
@@ -71,115 +64,135 @@ class GiscedataPolissa(osv.osv):
             self.empowering_post(cursor, uid, react, {'react': True})
         return res
 
-    def empowering_patch(self, cursor, uid, ids, vals, context=None):
-        em = Empowering(8449512768)
+    def empowering_patch(self, cursor, uid, ids, fields, context=None):
+        em = self.pool.get('empowering.api').service
         result = []
-        for polissa in self.read(cursor, uid, ids, ['id', 'name', 'etag']):
-            upd = set(vals.keys()) & set(self.EMPOWERING_MAP.keys())
-            if upd:
-                data = self.empowering_data(cursor, uid, ids, context)[0]
-                # Try to get the differences
-                keys_to_update = []
-                for k in upd:
-                    keys_to_update += self.EMPOWERING_MAP.get(k, [])
-                for k in data.copy().keys():
-                    if k not in keys_to_update:
-                        del data[k]
-                res = em.contract(polissa['name']).update(data,
-                                                          polissa['etag'])
-                result.append(none_to_false(res))
-                self.write(cursor, uid, [polissa['id']], {'etag': res['etag']})
+        for polissa in self.browse(cursor, uid, ids, context=context):
+            data = polissa.empowering_data(fields, context=context)[0]
+            res = em.contract(polissa.name).update(data, polissa.etag)
+            result.append(none_to_false(res))
+            self.write(cursor, uid, [polissa.id], {'etag': res['etag']})
         return result
 
     def empowering_post(self, cursor, uid, ids, context=None):
-        em = Empowering(8449512768)
+        em = self.pool.get('empowering.api').service
         data = self.empowering_data(cursor, uid, ids, context)
         res = em.contracts().create(data)
+        # https://github.com/nicolaiarocci/eve/commit/8dd330d9ea7f961f977df642aeea8d846eca48a2
+        if isinstance(res, dict):
+            res = [res]
         # Parse and assign etags
         for idx, resp in enumerate(res):
             self.write(cursor, uid, [ids[idx]], {'etag': resp['etag']})
         return res
 
-    def empowering_data(self, cursor, uid, ids, context=None):
+
+    def empowering_data(self, cursor, uid, ids, fields=None, context=None):
         """Converts contracts to AMON.
 
         {
-          "payerId":"payerID-123",
-          "ownerId":"ownerID-123",
-          "signerId":"signerID-123",
-          "power":123,
-          "dateStart":"2013-10-11T16:37:05Z",
-          "dateEnd":null,
-          "contractId":"contractID-123",
-          "customer":{
-            "customerId":"payerID-123",
-            "address":{
-              "city":"city-123",
-              "cityCode":"cityCode-123",
-              "countryCode":"ES",
-              "country":"Spain",
-              "street":"street-123",
-              "postalCode":"postalCode-123"
+          "payerId": "payerID-123",
+          "ownerId": "ownerID-123",
+          "signerId": "signerID-123",
+          "power": 123,
+          "dateStart": "2013-10-11T16:37:05Z",
+          "dateEnd": null,
+          "contractId": "contractID-123",
+          "customer":
+          {
+            "customerId": "payerID-123",
+            "address":
+            {
+              "buildingId": "building-123"
+              "city": "city-123",
+              "cityCode": "cityCode-123",
+              "countryCode": "ES",
+              "country": "Spain",
+              "street": "street-123",
+              "postalCode": "postalCode-123"
+            },
+            "profile":
+            {
+                "totalPersonsNumber": 3,
+                "minorsPersonsNumber": 0
+                "workingAgePersonsNumber": 2,
+                "retiredAgePersonsNumber": 1,
+                "malePersonsNumber": 2,
+                "femalePersonsNumber": 1,
+                "educationLevel": {
+                    "edu_prim" : 0,
+                    "edu_sec" : 1,
+                    "edu_uni" : 1,
+                    "edu_noStudies" : 1
+                }
             }
           },
-          "meteringPointId":"c1759810-90f3-012e-0404-34159e211070",
-          "devices":[
+          "meteringPointId": "c1759810-90f3-012e-0404-34159e211070",
+          "devices":
+          [
             {
-              "dateStart":"2013-10-11T16:37:05Z",
-              "dateEnd":null,
-              "deviceId":"c1810810-0381-012d-25a8-0017f2cd3574"
+              "dateStart": "2013-10-11T16:37:05Z",
+              "dateEnd": null,
+              "deviceId": "c1810810-0381-012d-25a8-0017f2cd3574"
             }
           ],
-          "version":1,
-          "activityCode":"activityCode",
-          "tariffId":"tariffID-123",
-          "companyId":1234567890
+          "version": 1,
+          "activityCode": "activityCode",
+          "tariffId": "tariffID-123"
         }
         """
         if not context:
             context = {}
         res = []
         modcon_obj = self.pool.get('giscedata.polissa.modcontractual')
+        cups_obj = self.pool.get('giscedata.cups.ps')
         if not hasattr(ids, '__iter__'):
             ids = [ids]
-        for polissa in self.browse(cursor, uid, ids, context):
+        if fields:
+            fields += ['modcontractual_activa', 'data_inici', 'data_final',
+                       'name']
+            if 'titular' in fields and 'cups' not in fields:
+                fields += ['cups']
+        for polissa in self.read(cursor, uid, ids, fields, context=context):
             if 'modcon_id' in context:
-                modcon = modcon_obj.get(context['modcon_id'])
+                modcon_id = modcon_obj.get(context['modcon_id'])
             else:
-                modcon = polissa.modcontractual_activa
+                modcon_id = polissa['modcontractual_activa'][0]
+            modcon = modcon_obj.read(cursor, uid, modcon_id, fields)
             contract = {
-                'companyId': 8449512768,
-                'ownerId': make_uuid('res.partner', modcon.titular.id),
-                'payerId': make_uuid('res.partner', modcon.pagador.id),
-                'dateStart': make_utc_timestamp(modcon.data_inici),
-                'dateEnd': make_utc_timestamp(modcon.data_final),
-                'contractId': polissa.name,
-                'tariffId': modcon.tarifa.name,
-                'power': int(modcon.potencia * 1000),
-                'version': int(modcon.name),
-                'activityCode': modcon.cnae and modcon.cnae.name or None,
-                'meteringPointId': make_uuid('giscedata.cups.ps',
-                                             modcon.cups.name),
-                'customer': {
-                    'customerId': make_uuid('res.partner', modcon.titular.id),
+                'dateStart': make_utc_timestamp(modcon['data_inici']),
+                'dateEnd': make_utc_timestamp(modcon['data_final']),
+                'version': int(modcon['name']),
+            }
+            if 'titular' in modcon:
+                contract['ownerId'] = make_uuid('res.partner',
+                                                modcon['titular'][0])
+                cups = cups_obj.browse(cursor, uid, modcon['cups'][0])
+                contract['customer'] = {
+                    'customerId': make_uuid('res.partner',
+                                            modcon['titular'][0]),
                     'address': {
-                        'city': polissa.cups.id_municipi.name,
-                        'cityCode': polissa.cups.id_municipi.ine,
-                        'countryCode': polissa.cups.id_provincia.country_id.code,
-                        'street': get_street_name(polissa.cups),
-                        'postalCode': polissa.cups.dp
+                        'city': cups.id_municipi.name,
+                        'cityCode': cups.id_municipi.ine,
+                        'countryCode': cups.id_provincia.country_id.code,
+                        'street': get_street_name(cups),
+                        'postalCode': cups.dp
                     }
                 }
-            }
-            devices = []
-            for comptador in polissa.comptadors:
-                devices.append({
-                    'dateStart': make_utc_timestamp(comptador.data_alta),
-                    'dateEnd': make_utc_timestamp(comptador.data_baixa),
-                    'deviceId': make_uuid('giscedata.lectures.comptador',
-                                          comptador.id)
-                })
-            contract['devices'] = devices
+            if 'pagador' in modcon:
+                contract['payerId'] = make_uuid('res.partner',
+                                                modcon['pagador'][0])
+            if 'name' in polissa:
+                contract['contractId'] = polissa['name']
+            if 'tarifa' in modcon:
+                contract['tariffId'] = modcon['tarifa'][1]
+            if 'potencia' in modcon:
+                contract['power'] = int(modcon['potencia'] * 1000)
+            if 'cnae' in modcon and modcon.get('cnae', False):
+                contract['activityCode'] = modcon['cnae'][1]
+            if 'cups' in modcon:
+                contract['meteringPointId'] = make_uuid('giscedata.cups.ps',
+                                                        modcon['cups'][1])
             res.append(remove_none(contract, context))
         return res
 
