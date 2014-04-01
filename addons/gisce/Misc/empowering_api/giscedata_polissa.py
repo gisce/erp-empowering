@@ -66,7 +66,7 @@ class GiscedataPolissa(osv.osv):
         return res
 
     @job(queue='empowering')
-    def empowering_patch(self, cursor, uid, ids, fields, context=None):
+    def empowering_patch(self, cursor, uid, ids, fields=None, context=None):
         em = self.pool.get('empowering.api').service
         result = []
         for polissa in self.browse(cursor, uid, ids, context=context):
@@ -131,14 +131,6 @@ class GiscedataPolissa(osv.osv):
             }
           },
           "meteringPointId": "c1759810-90f3-012e-0404-34159e211070",
-          "devices":
-          [
-            {
-              "dateStart": "2013-10-11T16:37:05Z",
-              "dateEnd": null,
-              "deviceId": "c1810810-0381-012d-25a8-0017f2cd3574"
-            }
-          ],
           "version": 1,
           "activityCode": "activityCode",
           "tariffId": "tariffID-123"
