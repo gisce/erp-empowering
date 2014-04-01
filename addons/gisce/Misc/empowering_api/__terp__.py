@@ -10,7 +10,7 @@
         * Integration between Empowering service
     """,
     "init_xml": [],
-    'update_xml': [],
+    'update_xml': ["giscedata_polissa_view.xml"],
     'demo_xml': [],
     'installable': True,
     'active': False,

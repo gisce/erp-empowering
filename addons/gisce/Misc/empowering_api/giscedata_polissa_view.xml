@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+         <record model="ir.ui.view" id="view_polisses_form">
+             <field name="name">giscedata_polissa.form</field>
+             <field name="model">giscedata.polissa</field>
+             <field name="type">form</field>
+             <field name="inherit_id" ref="giscedata_polissa.view_polisses_form"/>
+             <field name="arch" type="xml">
+                 <xpath expr="//notebook" position="inside">
+                     <page string="Empowering" attrs="{'invisible': [('etag', '=', False)]}">
+                        <field name="etag" readonly="1"/>
+                     </page>
+                 </xpath>
+             </field>
+         </record>
+    </data>
+</openerp>
