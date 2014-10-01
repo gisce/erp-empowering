@@ -5,27 +5,6 @@ from empowering.utils import make_uuid, remove_none, make_utc_timestamp, \
 from oorq.decorators import job
 
 
-def get_street_name(cups):
-    street = []
-    street_name = u''
-    if cups.cpo or cups.cpa:
-        street = u'CPO %s CPA %s' % (cups.cpo, cups.cpa)
-    else:
-        if cups.tv:
-            street.append(cups.tv.name)
-        if cups.nv:
-            street.append(cups.nv)
-        street_name += u' '.join(street)
-        street = [street_name]
-        for f_name, f in [(u'número', 'pnp'), (u'escalera', 'es'),
-                          (u'planta', 'pt'), (u'puerta', 'pu')]:
-            val = getattr(cups, f)
-            if val:
-                street.append(u'%s %s' % (f_name, val))
-    street_name = ', '.join(street)
-    return street_name
-
-
 class GiscedataPolissa(osv.osv):
     _name = 'giscedata.polissa'
     _inherit = 'giscedata.polissa'
