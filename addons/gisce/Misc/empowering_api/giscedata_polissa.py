@@ -3,6 +3,8 @@ from osv import osv, fields
 from empowering.utils import make_uuid, remove_none, make_utc_timestamp, \
     none_to_false
 from oorq.decorators import job
+from .amon import AmonConverter, check_response
+from .amon.utils import PoolWrapper
 
 
 class GiscedataPolissa(osv.osv):
@@ -27,16 +29,7 @@ class GiscedataPolissa(osv.osv):
         # Do the normals
         ids = list(set(ids) - set(react) - set(noves))
         if ids:
-            # Busquem les diferències entre la modcon anterior i l'actual
-            # per passar-ho per post
-            for polissa in self.browse(cursor, uid, ids):
-                modcon_id = polissa.modcontractual_activa.modcontractual_ant
-                modcon_id = modcon_id and modcon_id.id or False
-                ctx = {}
-                if modcon_id:
-                    ctx['modcon_id'] = modcon_id
-                changes = polissa.get_changes(context=ctx).keys()
-                self.empowering_patch(cursor, uid, [polissa.id], changes)
+            self.empowering_patch(cursor, uid, [polissa.id])
         if noves:
             self.empowering_post(cursor, uid, noves)
         # Reactivations
@@ -45,129 +38,33 @@ class GiscedataPolissa(osv.osv):
         return res
 
     @job(queue='empowering')
-    def empowering_patch(self, cursor, uid, ids, fields=None, context=None):
+    def empowering_patch(self, cursor, uid, ids, data=None, context=None):
+        polissa_f = ['name', 'etag']
         em = self.pool.get('empowering.api').service
         result = []
-        for polissa in self.browse(cursor, uid, ids, context=context):
-            data = polissa.empowering_data(fields, context=context)[0]
-            res = em.contract(polissa.name).update(data, polissa.etag)
+        for polissa in self.read(cursor, uid, ids, polissa_f, context=context):
+            amon_converter = AmonConverter(PoolWrapper(self.pool, cursor, uid))
+            if not data:
+                data = amon_converter.contract_to_amon(polissa['id'])[0]
+            res = em.contract(polissa['name']).update(data, polissa['etag'])
             result.append(none_to_false(res))
-            self.write(cursor, uid, [polissa.id], {'etag': res['etag']})
+            if check_response(res, data):
+                self.write(cursor, uid, [polissa['id']], {'etag': res['_etag']})
         return result
 
     @job(queue='empowering')
     def empowering_post(self, cursor, uid, ids, context=None):
         em = self.pool.get('empowering.api').service
-        data = self.empowering_data(cursor, uid, ids, context)
+        amon_converter = AmonConverter(PoolWrapper(self.pool, cursor, uid))
+        data = amon_converter.contract_to_amon(ids)
         res = em.contracts().create(data)
         # https://github.com/nicolaiarocci/eve/commit/8dd330d9ea7f961f977df642aeea8d846eca48a2
         if isinstance(res, dict):
             res = [res]
         # Parse and assign etags
         for idx, resp in enumerate(res):
-            self.write(cursor, uid, [ids[idx]], {'etag': resp['etag']})
-        return res
-
-
-    def empowering_data(self, cursor, uid, ids, fields=None, context=None):
-        """Converts contracts to AMON.
-
-        {
-          "payerId": "payerID-123",
-          "ownerId": "ownerID-123",
-          "signerId": "signerID-123",
-          "power": 123,
-          "dateStart": "2013-10-11T16:37:05Z",
-          "dateEnd": null,
-          "contractId": "contractID-123",
-          "customer":
-          {
-            "customerId": "payerID-123",
-            "address":
-            {
-              "buildingId": "building-123"
-              "city": "city-123",
-              "cityCode": "cityCode-123",
-              "countryCode": "ES",
-              "country": "Spain",
-              "street": "street-123",
-              "postalCode": "postalCode-123"
-            },
-            "profile":
-            {
-                "totalPersonsNumber": 3,
-                "minorsPersonsNumber": 0
-                "workingAgePersonsNumber": 2,
-                "retiredAgePersonsNumber": 1,
-                "malePersonsNumber": 2,
-                "femalePersonsNumber": 1,
-                "educationLevel": {
-                    "edu_prim" : 0,
-                    "edu_sec" : 1,
-                    "edu_uni" : 1,
-                    "edu_noStudies" : 1
-                }
-            }
-          },
-          "meteringPointId": "c1759810-90f3-012e-0404-34159e211070",
-          "version": 1,
-          "activityCode": "activityCode",
-          "tariffId": "tariffID-123"
-        }
-        """
-        if not context:
-            context = {}
-        res = []
-        modcon_obj = self.pool.get('giscedata.polissa.modcontractual')
-        cups_obj = self.pool.get('giscedata.cups.ps')
-        if not hasattr(ids, '__iter__'):
-            ids = [ids]
-        if fields:
-            fields += ['modcontractual_activa', 'data_inici', 'data_final',
-                       'name']
-            if 'titular' in fields and 'cups' not in fields:
-                fields += ['cups']
-        for polissa in self.read(cursor, uid, ids, fields, context=context):
-            if 'modcon_id' in context:
-                modcon_id = modcon_obj.get(context['modcon_id'])
-            else:
-                modcon_id = polissa['modcontractual_activa'][0]
-            modcon = modcon_obj.read(cursor, uid, modcon_id, fields)
-            contract = {
-                'dateStart': make_utc_timestamp(modcon['data_inici']),
-                'dateEnd': make_utc_timestamp(modcon['data_final']),
-                'version': int(modcon['name']),
-            }
-            if 'titular' in modcon:
-                contract['ownerId'] = make_uuid('res.partner',
-                                                modcon['titular'][0])
-                cups = cups_obj.browse(cursor, uid, modcon['cups'][0])
-                contract['customer'] = {
-                    'customerId': make_uuid('res.partner',
-                                            modcon['titular'][0]),
-                    'address': {
-                        'city': cups.id_municipi.name,
-                        'cityCode': cups.id_municipi.ine,
-                        'countryCode': cups.id_provincia.country_id.code,
-                        'street': get_street_name(cups),
-                        'postalCode': cups.dp
-                    }
-                }
-            if 'pagador' in modcon:
-                contract['payerId'] = make_uuid('res.partner',
-                                                modcon['pagador'][0])
-            if 'name' in polissa:
-                contract['contractId'] = polissa['name']
-            if 'tarifa' in modcon:
-                contract['tariffId'] = modcon['tarifa'][1]
-            if 'potencia' in modcon:
-                contract['power'] = int(modcon['potencia'] * 1000)
-            if 'cnae' in modcon and modcon.get('cnae', False):
-                contract['activityCode'] = modcon['cnae'][1]
-            if 'cups' in modcon:
-                contract['meteringPointId'] = make_uuid('giscedata.cups.ps',
-                                                        modcon['cups'][1])
-            res.append(remove_none(contract, context))
+            if check_response(resp, data[idx]):
+                self.write(cursor, uid, [ids[idx]], {'etag': resp['_etag']})
         return res
 
 GiscedataPolissa()

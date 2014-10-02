@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from osv import osv
 from oorq.decorators import job
-from empowering.utils import (make_utc_timestamp, remove_none, make_uuid,
-                              none_to_false)
+from .amon import AmonConverter
+from .amon.utils import PoolWrapper
 
 
 class GiscedataLecturesComptador(osv.osv):
@@ -31,59 +31,24 @@ class GiscedataLecturesComptador(osv.osv):
         self.empowering_patch(cursor, uid, ids, context=context)
         return res
 
-    def empowering_data(self, cursor, uid, polissa_ids, context=None):
-        """
-        "devices":
-          [
-            {
-              "dateStart": "2013-10-11T16:37:05Z",
-              "dateEnd": null,
-              "deviceId": "c1810810-0381-012d-25a8-0017f2cd3574"
-            }
-          ],
-        """
-        polissa_obj = self.pool.get('giscedata.polissa')
-        contracts = {}
-        for polissa in polissa_obj.read(cursor, uid, polissa_ids,
-                                        ['comptadors'], context=context):
-            devices = []
-            for comptador in self.read(cursor, uid, polissa['comptadors'],
-                                       self.trg_fields):
-                if hasattr(self, 'build_name_tg'):
-                    compt_serial = self.build_name_tg(comptador['id'])
-                else:
-                    compt_serial = comptador['name']
-                devices.append({
-                    'dateStart': make_utc_timestamp(comptador['data_alta']),
-                    'dateEnd': make_utc_timestamp(comptador['data_baixa']),
-                    'deviceId': make_uuid('giscedata.lectures.comptador',
-                                          compt_serial)
-                })
-            contracts[polissa['id']] = remove_none({
-                'devices': devices
-            }, context)
-        return contracts
 
     @job(queue='empowering')
     def empowering_patch(self, cursor, uid, ids, context=None):
         polissa_obj = self.pool.get('giscedata.polissa')
-        em = self.pool.get('empowering.api').service
+        patch = polissa_obj.empowering_patch
         result = []
         polisses_ids = []
+        polissa_fields = ['etag', 'name', 'comptadors']
         for comptador in self.read(cursor, uid, ids, ['polissa']):
             polissa_id = comptador['polissa'][0]
             if polissa_id not in polisses_ids:
                 polisses_ids.append(polissa_id)
-        data = self.empowering_data(cursor, uid, polisses_ids, context=context)
-        for contract in polissa_obj.read(cursor, uid, data.keys(),
-                                         ['etag', 'name'], context=context):
-            devices = data[contract['id']]
-            res = em.contract(contract['name']).update(devices,
-                                                       contract['etag'])
-            result.append(none_to_false(res))
-            polissa_obj.write(cursor, uid, [contract['id']], {
-                'etag': res['etag']
-            })
+        amon_converter = AmonConverter(PoolWrapper(self.pool, cursor, uid))
+        for contract in polissa_obj.read(cursor, uid, polisses_ids,
+                                         polissa_fields, context=context):
+            data = amon_converter.device_to_amon(contract['comptadors'])
+            devices = {'devices': data}
+            result += patch(cursor, uid, [contract['id']], devices)
         return result
 
 GiscedataLecturesComptador()

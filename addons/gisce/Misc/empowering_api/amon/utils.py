@@ -1,3 +1,5 @@
+import collections
+from functools import partial
 import logging
 import os
 
@@ -29,15 +31,40 @@ class Popper(object):
 
 
 class PoolWrapper(object):
-    def __init__(self, pool, cursor, uid, context=None):
+    def __init__(self, pool, cursor, uid):
         self.pool = pool
         self.cursor = cursor
         self.uid = uid
-        self.context = context
 
     def __getattr__(self, name):
         model = lowercase(name)
-        return self.pool.get(model)
+        return ModelWrapper(self.pool.get(model), self.cursor, self.uid)
+
+
+class ModelWrapper(object):
+    def __init__(self, model, cursor, uid):
+        self.model = model
+        self.cursor = cursor
+        self.uid = uid
+
+    def wrapper(self, method):
+        return partial(method, self.cursor, self.uid)
+
+    def __getattr__(self, item):
+        base = getattr(self.model, item)
+        if callable(base):
+            return lambda *args: self.wrapper(base)(*args)
+        else:
+            return base
+
+def recursive_update(d, u):
+    for k, v in u.iteritems():
+        if isinstance(v, collections.Mapping):
+            r = recursive_update(d.get(k, {}), v)
+            d[k] = r
+        else:
+            d[k] = u[k]
+    return d
 
 
 def config_from_environment(env_prefix, env_required=None, **kwargs):

@@ -4,6 +4,7 @@
 import logging
 
 from .cache import CUPS_CACHE, CUPS_UUIDS
+from .utils import recursive_update
 from empowering.utils import remove_none, make_uuid, make_utc_timestamp
 
 
@@ -211,9 +212,6 @@ class AmonConverter(object):
         res = []
         pol = O.GiscedataPolissa
         modcon_obj = O.GiscedataPolissaModcontractual
-        cups_obj = O.GiscedataCupsPs
-        muni_obj = O.ResMunicipi
-        compt_obj = O.GiscedataLecturesComptador
         if not hasattr(contract_ids, '__iter__'):
             contract_ids = [contract_ids]
         fields_to_read = ['modcontractual_activa', 'name', 'cups', 'comptadors', 'state']
@@ -227,10 +225,6 @@ class AmonConverter(object):
             else:
                 logger.error("Problema amb la polissa %s" % polissa['name'])
                 continue
-            cups_fields = ['id_municipi', 'tv', 'nv', 'cpa', 'cpo', 'pnp', 'pt',
-                           'es', 'pu', 'dp']
-            cups = cups_obj.read(polissa['cups'][0], cups_fields)
-            ine = muni_obj.read(cups['id_municipi'][0], ['ine'])['ine']
             contract = {
                 'ownerId': make_uuid('res.partner', modcon['titular'][0]),
                 'payerId': make_uuid('res.partner', modcon['pagador'][0]),
@@ -241,30 +235,50 @@ class AmonConverter(object):
                 'power': int(modcon['potencia'] * 1000),
                 'version': int(modcon['name']),
                 'activityCode': modcon['cnae'] and modcon['cnae'][1] or None,
-                'meteringPointId': make_uuid('giscedata.cups.ps', modcon['cups'][1]),
                 'customer': {
                     'customerId': make_uuid('res.partner', modcon['titular'][0]),
-                    'address': {
-                        'city': cups['id_municipi'][1],
-                        'cityCode': ine,
-                        'countryCode': 'ES',
-                        'street': get_street_name(cups),
-                        'postalCode': cups['dp']
-                    }
-                }
+                },
+                'devices': self.device_to_amon(polissa['comptadors'])
             }
-            devices = []
-            comptador_fields = ['data_alta', 'data_baixa']
-            for comptador in compt_obj.read(polissa['comptadors'], comptador_fields):
-                devices.append({
-                    'dateStart': make_utc_timestamp(comptador['data_alta']),
-                    'dateEnd': make_utc_timestamp(comptador['data_baixa']),
-                    'deviceId': make_uuid('giscedata.lectures.comptador',
-                                          compt_obj.build_name_tg(comptador['id']))
-                })
-            contract['devices'] = devices
+            cups = self.cups_to_amon(modcon['cups'][0])
+            recursive_update(contract, cups)
             res.append(remove_none(contract, context))
         return res
+
+    def device_to_amon(self, device_ids):
+        compt_obj = self.O.GiscedataLecturesComptador
+        devices = []
+        comptador_fields = ['data_alta', 'data_baixa']
+        for comptador in compt_obj.read(device_ids, comptador_fields):
+            devices.append({
+                'dateStart': make_utc_timestamp(comptador['data_alta']),
+                'dateEnd': make_utc_timestamp(comptador['data_baixa']),
+                'deviceId': make_uuid('giscedata.lectures.comptador',
+                                      compt_obj.build_name_tg(comptador['id']))
+            })
+        return devices
+
+    def cups_to_amon(self, cups_id):
+        cups_obj = self.O.GiscedataCupsPs
+        muni_obj = self.O.ResMunicipi
+        cups_fields = ['id_municipi', 'tv', 'nv', 'cpa', 'cpo', 'pnp', 'pt',
+                       'name', 'es', 'pu', 'dp']
+        cups = cups_obj.read(cups_id, cups_fields)
+        ine = muni_obj.read(cups['id_municipi'][0], ['ine'])['ine']
+        res = {
+            'meteringPointId': make_uuid('giscedata.cups.ps', cups['name']),
+            'customer': {
+                'address': {
+                    'city': cups['id_municipi'][1],
+                    'cityCode': ine,
+                    'countryCode': 'ES',
+                    'street': get_street_name(cups),
+                    'postalCode': cups['dp']
+                }
+            }
+        }
+        return res
+
 
 
 def check_response(response, amon_data):
