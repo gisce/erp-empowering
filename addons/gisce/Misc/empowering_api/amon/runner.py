@@ -5,9 +5,12 @@ import sys
 import time
 
 from .tasks import push_amon_measures, push_contracts
-from .utils import Popper, setup_mongodb, setup_peek
+from .utils import Popper, setup_mongodb, setup_peek, setup_logging
 
+
+setup_logging('/tmp/amon.log')
 logger = logging.getLogger('amon')
+
 
 if __name__ == '__main__':
     if sys.argv[1] == 'push_all_amon_measures':
