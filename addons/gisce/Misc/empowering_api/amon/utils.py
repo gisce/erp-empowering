@@ -2,10 +2,10 @@ import collections
 from functools import partial
 import logging
 import os
+import re
 
 from empowering import Empowering
 import erppeek
-from erppeek import lowercase
 import pymongo
 import redis
 from raven import Client
@@ -17,6 +17,13 @@ logger = logging.getLogger(__name__)
 
 
 __REDIS_POOL = None
+__FIRST_CAP_RE = re.compile('(.)([A-Z][a-z]+)')
+__ALL_CAP_RE = re.compile('([a-z0-9])([A-Z])')
+
+
+def lowercase(name):
+    s1 = __FIRST_CAP_RE.sub(r'\1.\2', name)
+    return __ALL_CAP_RE.sub(r'\1.\2', s1).lower()
 
 
 class Popper(object):
@@ -56,6 +63,7 @@ class ModelWrapper(object):
             return lambda *args: self.wrapper(base)(*args)
         else:
             return base
+
 
 def recursive_update(d, u):
     for k, v in u.iteritems():
