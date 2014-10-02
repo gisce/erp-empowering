@@ -15,7 +15,6 @@ logger = logging.getLogger('amon')
 if __name__ == '__main__':
     if sys.argv[1] == 'push_all_amon_measures':
         bucket = 500
-        meter_name = 'Not defined'
         serials = open('serials', 'r')
         for serial in serials:
             meter_name = serial.replace('\n', '').strip()
