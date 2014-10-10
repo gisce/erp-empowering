@@ -14,36 +14,37 @@ def log(msg, level=netsvc.LOG_INFO):
 class EmpoweringAPI(osv.osv):
     _name = 'empowering.api'
 
-    company_id = 0
-    cert_file = ''
-    service = None
-    version = 'v1'
-
     def setup(self, cursor, uid, company_id=None, cert_file=None,
               version=None, context=None):
         if not context:
             context = {}
         amon_setup_logging()
-        self.company_id = company_id
-        self.cert_file = cert_file
-        self.version = version
-        log("Setting Up Empowering Service (%s). Company-Id: %s Cert file: %s"
-            % (self.version, self.company_id, self.cert_file))
+        self.company_id = config.get('empowering_company', company_id)
+        self.cert_file = config.get('empwoering_cert', cert_file)
+        self.version = config.get('empowering_version', version)
 
-        self.service = setup_empowering_api(
-            company_id=self.company_id, key_file=self.cert_file,
-            cert_file=self.cert_file, version=self.version
-        )
+        emp_conf = {}
+        if self.company_id:
+            emp_conf['company_id'] = self.company_id
+        if self.cert_file:
+            emp_conf['cert_file'] = self.cert_file
+        if self.version:
+            emp_conf['version'] = self.version
+
+        self.service = setup_empowering_api(**emp_conf)
+        log("Setting Up Empowering Service (%s). Company-Id: %s Cert file: %s"
+            % (self.service.apiroot, self.service.company_id,
+               self.service.cert_file))
         for k, v in context.get('empowering_args', {}).items():
             log("%s => %s" % (k, v))
             setattr(self.service, k, v)
 
     def __init__(self, pool, cursor):
+        self.company_id = None
+        self.cert_file = None
+        self.service = None
+        self.version = None
+        self.setup(cursor, 1)
         super(EmpoweringAPI, self).__init__(pool, cursor)
-        company_id = config.get('empowering_company', 0)
-        cert_file = config.get('empwoering_cert', '')
-        version = config.get('empowering_version', 'v1')
-        if company_id and cert_file:
-            self.setup(cursor, 1, company_id, cert_file, version)
 
 EmpoweringAPI()
