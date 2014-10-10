@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from hashlib import sha1
+import json
 import logging
 
 from .cache import CUPS_CACHE, CUPS_UUIDS
@@ -280,15 +282,17 @@ class AmonConverter(object):
         return res
 
 
-
 def check_response(response, amon_data):
+    logger.debug('Handlers: %s Class: %s' % (logger.handlers, logger))
     if response['_status'] != 'OK':
+        content = '%s%s' % (json.dumps(amon_data), json.dumps(response))
+        hash = sha1(content).hexdigest()[:8]
         logger.error(
-            "Error on Empowering response (%s)" % response['_status'],
-            data={
+            "Empowering response Code: %s - %s" % (response['_status'], hash),
+            extra={'data': {
                 'amon_data': amon_data,
-                'issues': response['_issues']
-            }
+                'response': response
+            }}
         )
         return False
     return True

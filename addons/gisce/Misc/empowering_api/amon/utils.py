@@ -9,7 +9,6 @@ import erppeek
 import pymongo
 import redis
 from raven import Client
-from raven.conf import setup_logging as sentry_setup_logging
 from raven.handlers.logging import SentryHandler
 
 
@@ -118,12 +117,13 @@ def setup_redis():
 
 
 def setup_logging(logfile=None):
-    logger = logging.getLogger('amon')
+    amon_logger = logging.getLogger('amon')
     if logfile:
         hdlr = logging.FileHandler(logfile)
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
         hdlr.setFormatter(formatter)
-        logger.addHandler(hdlr)
+        amon_logger.addHandler(hdlr)
     sentry = Client()
     sentry_handler = SentryHandler(sentry, level=logging.ERROR)
-    sentry_setup_logging(sentry_handler)
+    amon_logger.addHandler(sentry_handler)
+    amon_logger.info('Amon logger setup')
