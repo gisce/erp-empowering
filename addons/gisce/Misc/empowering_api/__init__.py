@@ -1,4 +1,2 @@
 import empowering_api
 import giscedata_polissa
-import giscedata_cups
-import giscedata_lectures
