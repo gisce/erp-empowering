@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from osv import osv
-from .amon import AmonConverter
-from .amon.utils import PoolWrapper
+from amoniak import AmonConverter
+from amoniak.utils import PoolWrapper
 
 
 class GiscedataCupsPs(osv.osv):

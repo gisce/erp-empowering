@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from osv import osv, fields
-from empowering.utils import make_uuid, remove_none, make_utc_timestamp, \
-    none_to_false
+from empowering.utils import none_to_false
 from oorq.decorators import job
-from .amon import AmonConverter, check_response
-from .amon.utils import PoolWrapper
+from amoniak import AmonConverter, check_response
+from amoniak.utils import PoolWrapper
 
 
 class GiscedataPolissa(osv.osv):

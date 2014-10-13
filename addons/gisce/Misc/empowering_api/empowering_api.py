@@ -3,7 +3,7 @@ import netsvc
 from osv import osv
 from tools import config
 
-from .amon.utils import setup_logging as amon_setup_logging, setup_empowering_api
+from amoniak.utils import setup_logging as amon_setup_logging, setup_empowering_api
 
 
 def log(msg, level=netsvc.LOG_INFO):
