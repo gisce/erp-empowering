@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Empowering API (online mode)",
-    "version": "0-dev",
+    "version": "0.1.0",
     "depends": ["base", "empowering_api", "oorq"],
     "author": "GISCE-TI, S.L.",
     "category": "Misc",
