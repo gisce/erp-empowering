@@ -20,7 +20,7 @@ class EmpoweringAPI(osv.osv):
             context = {}
         amon_setup_logging()
         self.company_id = config.get('empowering_company', company_id)
-        self.cert_file = config.get('empwoering_cert', cert_file)
+        self.cert_file = config.get('empowering_cert', cert_file)
         self.version = config.get('empowering_version', version)
 
         emp_conf = {}
@@ -28,6 +28,7 @@ class EmpoweringAPI(osv.osv):
             emp_conf['company_id'] = self.company_id
         if self.cert_file:
             emp_conf['cert_file'] = self.cert_file
+            emp_conf['key_file'] = self.cert_file
         if self.version:
             emp_conf['version'] = self.version
 
