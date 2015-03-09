@@ -14,14 +14,16 @@ def log(msg, level=netsvc.LOG_INFO):
 class EmpoweringAPI(osv.osv):
     _name = 'empowering.api'
 
-    def setup(self, cursor, uid, company_id=None, cert_file=None,
-              version=None, context=None):
+    def setup(self, cursor, uid, username=None, password=None, company_id=None,
+              cert_file=None, version=None, context=None):
         if not context:
             context = {}
         amon_setup_logging()
         self.company_id = config.get('empowering_company', company_id)
         self.cert_file = config.get('empowering_cert', cert_file)
         self.version = config.get('empowering_version', version)
+        self.username = config.get('empowering_username', username)
+        self.password = config.get('empowering_password', password)
 
         emp_conf = {}
         if self.company_id:
@@ -31,6 +33,9 @@ class EmpoweringAPI(osv.osv):
             emp_conf['key_file'] = self.cert_file
         if self.version:
             emp_conf['version'] = self.version
+        if self.username and self.password:
+            emp_conf['username'] = self.username
+            emp_conf['password'] = self.password
 
         self.service = setup_empowering_api(**emp_conf)
         log("Setting Up Empowering Service (%s). Company-Id: %s Cert file: %s"
@@ -41,6 +46,8 @@ class EmpoweringAPI(osv.osv):
             setattr(self.service, k, v)
 
     def __init__(self, pool, cursor):
+        self.username = None
+        self.password = None
         self.company_id = None
         self.cert_file = None
         self.service = None
