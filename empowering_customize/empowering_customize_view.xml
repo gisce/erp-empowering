@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <menuitem name="Empowering services" id="menu_empowering"/>
+        <menuitem name="Customitzation" parent="menu_empowering" id="menu_empowering_customize"/>
+        <!-- Profile channel -->
+        <record model="ir.ui.view" id="view_empowering_customize_profile_channel_form">
+            <field name="name">empowering_customize_profile_channel.form</field>
+            <field name="model">empowering.customize.profile.channel</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Profile Channel">
+                    <notebook>
+                        <page string="General">
+                            <field name="channel_id" select="1"/>
+                            <field name="template_id"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_empowering_customize_profile_channel_tree">
+            <field name="name">empowering_customize_profile_channel.tree</field>
+            <field name="model">empowering.customize.profile.channel</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Profile channel">
+                    <field name="channel_id"/>
+                    <field name="template_id"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Profile -->
+        <record model="ir.ui.view" id="view_empowering_customize_profile_form">
+            <field name="name">empowering_customize_profile.form</field>
+            <field name="model">empowering.customize.profile</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Empowering Profile">
+                    <notebook>
+                        <page string="General">
+                            <field name="name" select="1" colspan="4"/>
+                            <field name="interval_id"/>
+                            <separator string="Channels" colspan="4"/>
+                            <field name="channels_ids" colspan="4" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_empowering_customize_profile_tree">
+            <field name="name">empowering_customize_profile.tree</field>
+            <field name="model">empowering.customize.profile</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Empowering profiles">
+                    <field name="name" select="1"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_empowering_customize_profile_tree">
+            <field name="name">Empowering profiles</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">empowering.customize.profile</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_empowering_customize_profile_tree"/>
+        </record>
+        <menuitem name="Profiles" action="action_empowering_customize_profile_tree" id="menu_empowering_customize_profile_tree" parent="menu_empowering_customize"/>
+        <!-- Channel -->
+        <record model="ir.ui.view" id="view_empowering_customize_channel_form">
+            <field name="name">empowering_customize_channel.form</field>
+            <field name="model">empowering.customize.channel</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Empowering Channel">
+                    <notebook>
+                        <page string="General">
+                            <field name="name" select="1"/>
+                            <field name="default_template_id"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_empowering_customize_channel_tree">
+            <field name="name">empowering_customize_channel.tree</field>
+            <field name="model">empowering.customize.channel</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Empowering channel">
+                    <field name="name"/>
+                    <field name="default_template_id"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_empowering_customize_channel_tree">
+            <field name="name">Empowering Channels</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">empowering.customize.channel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_empowering_customize_channel_tree"/>
+        </record>
+        <menuitem name="Channels" action="action_empowering_customize_channel_tree" id="menu_empowering_customize_channel_tree" parent="menu_empowering_customize"/>
+        <!-- Template -->
+        <record model="ir.ui.view" id="view_empowering_customize_template_form">
+            <field name="name">empowering_customize_template.form</field>
+            <field name="model">empowering.customize.template</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Empowering template">
+                    <notebook>
+                        <page string="General">
+                            <field name="name" select="1"/>
+                            <field name="path" colspan="4"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_empowering_customize_template_tree">
+            <field name="name">empowering_customize_template.tree</field>
+            <field name="model">empowering.customize.template</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Empowering template">
+                    <field name="name"/>
+                    <field name="path"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_empowering_customize_template_tree">
+            <field name="name">Empowering templates</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">empowering.customize.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_empowering_customize_template_tree"/>
+        </record>
+        <menuitem name="Templates" action="action_empowering_customize_template_tree" id="menu_empowering_customize_template_tree" parent="menu_empowering_customize"/>
+        <!-- Interval -->
+        <record model="ir.ui.view" id="view_empowering_customize_interval_form">
+            <field name="name">empowering_customize_interval.form</field>
+            <field name="model">empowering.customize.interval</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Empowering Interval">
+                    <notebook>
+                        <page string="General">
+                            <field name="number"/>
+                            <field name="measure"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_empowering_customize_interval_tree">
+            <field name="name">empowering_customize_interval.tree</field>
+            <field name="model">empowering.customize.interval</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Empowering interval">
+                    <field name="number"/>
+                    <field name="measure"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_empowering_customize_interval_tree">
+            <field name="name">Empowering intervals</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">empowering.customize.interval</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_empowering_customize_interval_tree"/>
+        </record>
+        <menuitem name="Intervals" action="action_empowering_customize_interval_tree" id="menu_empowering_customize_interval_tree" parent="menu_empowering_customize"/>
+    </data>
+</openerp>
