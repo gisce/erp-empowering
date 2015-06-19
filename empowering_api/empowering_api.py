@@ -126,7 +126,6 @@ class EmpoweringModcontractualProfile(osv.osv):
     _name = 'empowering.modcontractual.profile'
 
     _columns = {
-        # TBA: Reference modcontractual instead of polissa due renting apartment scenario
         'modcontractual_id': fields.many2one('giscedata.polissa.modcontractual', 'Contract Modification', required=True,
                                              readonly=True, select=1),
         'totalPersonsNumber': fields.integer('Total persons number'),
@@ -140,6 +139,7 @@ class EmpoweringModcontractualProfile(osv.osv):
         'eduLevel_uni': fields.integer('University education level persons number'),
         'eduLevel_noStudies': fields.integer('No studies education level persons number')
     }
+
 EmpoweringModcontractualProfile()
 
 
@@ -147,7 +147,6 @@ class EmpoweringModcontractualService(osv.osv):
     _name = 'empowering.modcontractual.service'
 
     _columns = {
-        # TBA: Reference modcontractual instead of polissa due renting apartment scenario
         'modcontractual_id': fields.many2one('giscedata.polissa.modcontractual', 'Contract modification', required=True,
                                              readonly=True, select=1),
         'OT101': fields.char('OT101', size=100),
