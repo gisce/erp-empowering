@@ -62,8 +62,6 @@ class EmpoweringCupsBuilding(osv.osv):
     _name = 'empowering.cups.building'
 
     _columns = {
-        'cups_id': fields.many2one('giscedata.cups.ps', 'CUPS', required=True,
-                                   readonly=True, select=1),
         'meteringPointId': fields.integer('Metering point identifier'),
 
         'buildingConstructionYear': fields.integer('Building construction year'),

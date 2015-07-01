@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from osv import osv, fields
-import uuid
 
 class GiscedataCupsPs(osv.osv):
     _name = 'giscedata.cups.ps'
