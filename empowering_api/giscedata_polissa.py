@@ -7,7 +7,9 @@ class GiscedataPolissa(osv.osv):
     _inherit = 'giscedata.polissa'
 
     _columns = {
-        'etag': fields.char('ETag', size=50)
+        'etag': fields.char('ETag', size=50),
+        'empowering_profile': fields.many2one('empowering.modcontractual.profile', 'Empowering profile'),
+        'empowering_service': fields.many2one('empowering.modcontractual.service', 'Empowering services')
     }
 
 GiscedataPolissa()
