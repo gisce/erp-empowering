@@ -40,7 +40,6 @@
                     <notebook>
                         <page string="General">
                             <field name="name" select="1" colspan="4"/>
-                            <field name="interval_id"/>
                             <separator string="Channels" colspan="4"/>
                             <field name="channels_ids" colspan="4" nolabel="1"/>
                         </page>
@@ -76,8 +75,8 @@
                 <form string="Empowering Channel">
                     <notebook>
                         <page string="General">
+                            <field name="code" select="1"/>
                             <field name="name" select="1"/>
-                            <field name="default_template_id"/>
                         </page>
                     </notebook>
                 </form>
@@ -89,8 +88,8 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Empowering channel">
+                    <field name="code"/>
                     <field name="name"/>
-                    <field name="default_template_id"/>
                 </tree>
             </field>
         </record>

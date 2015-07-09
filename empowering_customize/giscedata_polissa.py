@@ -9,6 +9,11 @@ class GiscedataPolissa(osv.osv):
         'empowering_profile_id': fields.many2one(
             'empowering.customize.profile',
             'Empowering Profile'
+        ),
+        'empowering_channels_log': fields.one2many(
+            'empowering.customize.profile.channel.log',
+            'contract_id',
+            'Empowering Log'
         )
     }
 

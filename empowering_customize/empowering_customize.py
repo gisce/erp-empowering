@@ -39,14 +39,13 @@ class EmpoweringCustomizeProfile(osv.osv):
             'empowering_profile_id',
             'Contracts'
         ),
+        'default_template_id': fields.many2one(
+            'empowering.customize.template', 'Template'
+        ),
         'channels_ids': fields.one2many(
             'empowering.customize.profile.channel',
             'profile_id',
             'Channels'
-        ),
-        'interval_id': fields.many2one(
-            'empowering.customize.interval',
-            'Interval'
         )
     }
 
@@ -67,9 +66,7 @@ class EmpoweringCustomizeChannel(osv.osv):
     _name = 'empowering.customize.channel'
     _columns = {
         'name': fields.char('Name', size=256, required=True),
-        'default_template_id': fields.many2one(
-            'empowering.customize.template', 'Template'
-        )
+        'code': fields.char('Code', size=32, required=True),
     }
 EmpoweringCustomizeChannel()
 
@@ -91,7 +88,29 @@ class EmpoweringCustomizeProfileChannel(osv.osv):
             'empowering.customize.template',
             'Template',
             required=True
+        ),
+        'interval_id': fields.many2one(
+            'empowering.customize.interval',
+            'Interval'
         )
     }
 
 EmpoweringCustomizeProfileChannel()
+
+
+class EmpoweringCustomizeProfileChannelLog(osv.osv):
+    _name = 'empowering.customize.profile.channel.log'
+
+    _columns = {
+        'contract_id': fields.many2one(
+            'giscedata.polissa',
+            'Contract'
+        ),
+        'channel_id': fields.many2one(
+            'empowering.customize.profile.channel',
+            'Channel'
+        ),
+        'last_generated': fields.datetime('Last generated')
+    }
+
+EmpoweringCustomizeProfileChannelLog()
