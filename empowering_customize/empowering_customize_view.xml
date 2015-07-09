@@ -40,6 +40,7 @@
                     <notebook>
                         <page string="General">
                             <field name="name" select="1" colspan="4"/>
+                            <field name="default_template_id" colspan="4"/>
                             <separator string="Channels" colspan="4"/>
                             <field name="channels_ids" colspan="4" nolabel="1"/>
                         </page>
