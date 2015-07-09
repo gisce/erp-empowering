@@ -6,7 +6,7 @@ from tools import config
 import pooler
 
 
-class ReprtEmpoweringCustomize(webkit_report.WebKitParser):
+class ReportEmpoweringCustomize(webkit_report.WebKitParser):
     def create_single_pdf(self, cursor, uid, ids, data, report_xml, context=None):
         if len(ids) > 1:
             raise Exception("Empowering custom report only accepts list of one id")
@@ -14,7 +14,7 @@ class ReprtEmpoweringCustomize(webkit_report.WebKitParser):
             context = {}
         if 'empowering_channel' not in context:
             raise Exception('empowering_channel code is not defined in context')
-        parent = super(ReprtEmpoweringCustomize, self).create_single_pdf
+        parent = super(ReportEmpoweringCustomize, self).create_single_pdf
         pool = pooler.get_pool(cursor.dbname)
         polissa = pool.get('giscedata.polissa').browse(cursor, uid, ids[0])
         channel_obj = pool.get('empowering.customize.profile.channel')
@@ -47,7 +47,7 @@ class report_webkit_html(report_sxw.rml_parse):
         })
 
 
-ReprtEmpoweringCustomize(
+ReportEmpoweringCustomize(
     'report.empowering.customize',
     'giscedata.polissa',
     False,
