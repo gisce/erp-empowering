@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_giscedata_polissa_form">
+            <field name="name">giscedata_polissa.form</field>
+            <field name="model">giscedata.polissa</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="empowering_api.view_polisses_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Empowering']" position="inside">
+                    <field name="empowering_profile_id" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
