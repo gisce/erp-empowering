@@ -30,6 +30,16 @@ class EmpoweringCustomizeInterval(osv.osv):
 EmpoweringCustomizeInterval()
 
 
+class EmpoweringCustomizeTemplate(osv.osv):
+    _name = 'empowering.customize.template'
+    _columns = {
+        'name': fields.char('Name', size=256, required=True),
+        'path': fields.char('Template path', size=256, required=True)
+    }
+
+EmpoweringCustomizeTemplate()
+
+
 class EmpoweringCustomizeProfile(osv.osv):
     _name = 'empowering.customize.profile'
     _columns = {
@@ -50,16 +60,6 @@ class EmpoweringCustomizeProfile(osv.osv):
     }
 
 EmpoweringCustomizeProfile()
-
-
-class EmpoweringCustomizeTemplate(osv.osv):
-    _name = 'empowering.customize.template'
-    _columns = {
-        'name': fields.char('Name', size=256, required=True),
-        'path': fields.char('Template path', size=256, required=True)
-    }
-
-EmpoweringCustomizeTemplate()
 
 
 class EmpoweringCustomizeChannel(osv.osv):
