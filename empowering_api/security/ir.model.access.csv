@@ -1,0 +1,10 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_empowering_cups_building_readonly","empowering.cups.building","model_empowering_cups_building","group_empowering_readonly",1,0,0,0
+"access_empowering_cups_building_user","empowering.cups.building","model_empowering_cups_building","group_empowering_user",1,1,1,0
+"access_empowering_cups_building_manager","empowering.cups.building","model_empowering_cups_building","group_empowering_manager",1,1,1,1
+"access_empowering_modcontractual_profile_readonly","empowering.modcontractual.profile","model_empowering_modcontractual_profile","group_empowering_readonly",1,0,0,0
+"access_empowering_modcontractual_profile_user","empowering.modcontractual.profile","model_empowering_modcontractual_profile","group_empowering_user",1,1,1,0
+"access_empowering_modcontractual_profile_manager","empowering.modcontractual.profile","model_empowering_modcontractual_profile","group_empowering_manager",1,1,1,1
+"access_empowering_modcontractual_service_readonly","empowering.modcontractual.service","model_empowering_modcontractual_service","group_empowering_readonly",1,0,0,0
+"access_empowering_modcontractual_service_user","empowering.modcontractual.service","model_empowering_modcontractual_service","group_empowering_user",1,1,1,0
+"access_empowering_modcontractual_service_manager","empowering.modcontractual.service","model_empowering_modcontractual_service","group_empowering_manager",1,1,1,1

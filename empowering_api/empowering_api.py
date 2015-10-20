@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import netsvc
-from osv import osv
+from osv import osv, fields
 from tools import config
 
 from amoniak.utils import setup_logging as amon_setup_logging, setup_empowering_api
@@ -56,3 +56,114 @@ class EmpoweringAPI(osv.osv):
         super(EmpoweringAPI, self).__init__(pool, cursor)
 
 EmpoweringAPI()
+
+
+class EmpoweringCupsBuilding(osv.osv):
+    _name = 'empowering.cups.building'
+
+    _columns = {
+        'cups_id': fields.many2one('giscedata.cups.ps', 'CUPS', required=True,
+                                   readonly=True, select=1),
+
+        'meteringPointId': fields.integer('Metering point identifier'),
+
+        'buildingConstructionYear': fields.integer('Building construction year'),
+        'dwellingArea': fields.integer('Dwelling area'),
+        'buildingType': fields.selection([('Single_house', 'Single house'),
+                                          ('Apartment', 'Apartment')],
+                                         'Building type'),
+        'dwellingPositionInBuilding':  fields.selection([('first_floor', 'First floor'),
+                                                         ('middle_floor', 'Middle floor'),
+                                                         ('last_floor', 'Last floor'),
+                                                         ('other', 'Other')],
+                                                        'Dwelling position in building'),
+        'dwellingOrientation': fields.selection([('S', 'South'),
+                                                 ('SE', 'Southeast'),
+                                                 ('E', 'East'),
+                                                 ('NE', 'Northeast'),
+                                                 ('N', 'North'),
+                                                 ('NW', 'Northwest'),
+                                                 ('W', 'West'),
+                                                 ('SW', 'Southwest')],
+                                                'Dwelling orientation'),
+        'buildingWindowsType': fields.selection([('single_panel', 'Single panel'),
+                                                 ('double_panel', 'Double panel'),
+                                                 ('triple_panel', 'Triple panel'),
+                                                 ('low_emittance', 'Low emittance'),
+                                                 ('other', 'Other')],
+                                                'Building windows type'),
+        'buildingWindowsFrame': fields.selection([('PVC', 'PVC'),
+                                                  ('wood', 'Wood'),
+                                                  ('aluminium', 'Aluminium'),
+                                                  ('steel', 'Steel'),
+                                                  ('other', 'Other')],
+                                                 'Building windows frame'),
+        'buildingHeatingSource': fields.selection([('electricity', 'Electricity'),
+                                                   ('gas', 'Gas'),
+                                                   ('gasoil', 'Gasoil'),
+                                                   ('district_heating', 'District heating'),
+                                                   ('biomass', 'Biomass'),
+                                                   ('other', 'Other')],
+                                                  'Building heating source'),
+        'buildingHeatingSourceDhw': fields.selection([('electricity', 'Electricity'),
+                                                      ('gas', 'Gas'),
+                                                      ('gasoil', 'Gasoil'),
+                                                      ('district_heating', 'District heating'),
+                                                      ('biomass', 'Biomassa'),
+                                                      ('other', 'Other')],
+                                                     'Building heating source dhw'),
+        'buildingSolarSystem': fields.selection([('PV'),
+                                                 ('solar_thermal_heating', 'Solar thermal heating'),
+                                                 ('solar_thermal_DHW', 'Solar thermal DHW'),
+                                                 ('other', 'Other'),
+                                                 ('not_installed', 'Not installed')],
+                                                'Building solar system')
+    }
+
+EmpoweringCupsBuilding()
+
+
+class EmpoweringModcontractualProfile(osv.osv):
+    _name = 'empowering.modcontractual.profile'
+
+    _columns = {
+        'modcontractual_id': fields.many2one('giscedata.polissa.modcontractual', 'Contract Modification', required=True,
+                                             readonly=True, select=1),
+        'totalPersonsNumber': fields.integer('Total persons number'),
+        'minorPersonsNumber': fields.integer('Minor persons number'),
+        'workingAgePersonsNumber': fields.integer('Working age persons number'),
+        'retiredAgePersonsNumber': fields.integer('Retired age persons number'),
+        'malePersonsNumber': fields.integer('Male persons number'),
+        'femalePersonsNumber': fields.integer('Female persons number'),
+        'eduLevel_prim': fields.integer('Primary education level persons number'),
+        'eduLevel_sec': fields.integer('Secondary education level persons number'),
+        'eduLevel_uni': fields.integer('University education level persons number'),
+        'eduLevel_noStudies': fields.integer('No studies education level persons number')
+    }
+
+EmpoweringModcontractualProfile()
+
+
+class EmpoweringModcontractualService(osv.osv):
+    _name = 'empowering.modcontractual.service'
+
+    _columns = {
+        'modcontractual_id': fields.many2one('giscedata.polissa.modcontractual', 'Contract modification', required=True,
+                                             readonly=True, select=1),
+        'OT101': fields.char('OT101', size=100),
+        'OT103': fields.char('OT103', size=100),
+        'OT105': fields.char('OT105', size=100),
+        'OT106': fields.char('OT106', size=100),
+        'OT109': fields.char('OT109', size=100),
+        'OT201': fields.char('OT201', size=100),
+        'OT204': fields.char('OT204', size=100),
+        'OT401': fields.char('OT401', size=100),
+        'OT502': fields.char('OT502', size=100),
+        'OT503': fields.char('OT503', size=100),
+        'OT603': fields.char('OT603', size=100),
+        'OT603g': fields.char('OT603g', size=100),
+        'OT701': fields.char('OT701', size=100),
+        'OT703': fields.char('OT703', size=100)
+    }
+
+EmpoweringModcontractualService()

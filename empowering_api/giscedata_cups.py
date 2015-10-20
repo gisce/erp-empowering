@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from osv import osv, fields
 
-
-class EmpoweringCups(osv.osv):
+class GiscedataCupsPs(osv.osv):
     _name = 'giscedata.cups.ps'
     _inherit = 'giscedata.cups.ps'
 
@@ -14,4 +13,4 @@ class EmpoweringCups(osv.osv):
         'empowering': lambda *a: False,
     }
 
-EmpoweringCups()
+GiscedataCupsPs()

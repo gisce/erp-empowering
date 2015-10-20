@@ -1,6 +1,5 @@
 from osv import osv, fields
 
-
 class GiscedataLecturesComptador(osv.osv):
     _name = 'giscedata.lectures.comptador'
     _inherit = 'giscedata.lectures.comptador'

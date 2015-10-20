@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="res.groups" id="group_empowering_readonly">
+            <field name="name">Empowering / ReadOnly</field>
+        </record>
+        <record model="res.groups" id="group_empowering_user">
+            <field name="name">Empowering / User</field>
+        </record>
+        <record model="res.groups" id="group_empowering_manager">
+            <field name="name">Empowering / Manager</field>
+        </record>
+     </data>
+</openerp>

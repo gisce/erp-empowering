@@ -12,7 +12,7 @@ class GiscedataCupsPs(osv.osv):
     def write(self, cursor, uid, ids, vals, context=None):
         polissa_obj = self.pool.get('giscedata.polissa')
         res = super(GiscedataCupsPs, self).write(cursor, uid, ids, vals,
-                                                  context=context)
+                                                 context=context)
         amon_converter = AmonConverter(PoolWrapper(self.pool, cursor, uid))
         trigger_fields = [
             'id_municipi', 'id_poblacio', 'tv', 'nv', 'pnp', 'es', 'pt', 'pu',
@@ -26,7 +26,7 @@ class GiscedataCupsPs(osv.osv):
             for polissa_id in pols:
                 data = amon_converter.contract_to_amon(polissa_id)[0]
                 data = dict(meteringPointId=data['meteringPointId'],
-                          customer=data['customer'])
+                            customer=data['customer'])
                 polissa_obj.empowering_patch(cursor, uid, pols, data)
         return res
 

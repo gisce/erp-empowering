@@ -10,7 +10,8 @@
         * Integration between Empowering service
     """,
     "init_xml": [],
-    'update_xml': ["giscedata_polissa_view.xml"],
+    'update_xml': ["giscedata_polissa_view.xml", "security/empowering_api_security.xml",
+                   "security/ir.model.access.csv"],
     'demo_xml': [],
     'installable': True,
     'active': False,
