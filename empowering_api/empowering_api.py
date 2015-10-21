@@ -112,7 +112,7 @@ class EmpoweringCupsBuilding(osv.osv):
                                                       ('biomass', 'Biomassa'),
                                                       ('other', 'Other')],
                                                      'Building heating source dhw'),
-        'buildingSolarSystem': fields.selection([('PV'),
+        'buildingSolarSystem': fields.selection([('PV', 'FV'),
                                                  ('solar_thermal_heating', 'Solar thermal heating'),
                                                  ('solar_thermal_DHW', 'Solar thermal DHW'),
                                                  ('other', 'Other'),
