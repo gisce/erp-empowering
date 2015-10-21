@@ -407,7 +407,7 @@ msgstr "Servicios Empowering"
 #. module: empowering_api
 #: field:empowering.cups.building,buildingSolarSystem:0
 msgid "Building solar system"
-msgstr "Edificio con sistema solar.FV"
+msgstr "Edificio con sistema solar"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingHeatingSource:0
