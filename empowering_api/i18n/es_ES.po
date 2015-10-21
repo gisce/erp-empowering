@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.14\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2015-10-21 09:33:21+0000\n"
-"PO-Revision-Date: 2015-10-21 12:49+0100\n"
+"PO-Revision-Date: 2015-10-21 17:08+0100\n"
 "Last-Translator: Eduard Carreras <ecarreras@gisce.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgstr "OT701"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,eduLevel_prim:0
 msgid "Primary education level persons number"
-msgstr "Número de personas con educación primária"
+msgstr "Número de personas con educación primaria"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT703:0
@@ -215,7 +215,7 @@ msgstr "Último piso"
 #. module: empowering_api
 #: field:empowering.cups.building,buildingHeatingSource:0
 msgid "Building heating source"
-msgstr "Fuente de calefacción del edificio"
+msgstr "Fuente energia para calefacción"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT401:0
@@ -225,7 +225,7 @@ msgstr "OT401"
 #. module: empowering_api
 #: field:empowering.cups.building,buildingHeatingSourceDhw:0
 msgid "Building heating source dhw"
-msgstr "Edificio ACS fuente de calor"
+msgstr "Fuente energía para ACS"
 
 #. module: empowering_api
 #: field:giscedata.polissa,empowering_profile:0
@@ -321,7 +321,7 @@ msgstr "OT103"
 #. module: empowering_api
 #: field:empowering.cups.building,dwellingArea:0
 msgid "Dwelling area"
-msgstr "Área de vivienda"
+msgstr "Área"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT101:0
@@ -336,12 +336,12 @@ msgstr "Posición vivienda en edificio"
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingType:0
 msgid "Single house"
-msgstr "Casa sola"
+msgstr "Casa"
 
 #. module: empowering_api
 #: field:empowering.cups.building,dwellingOrientation:0
 msgid "Dwelling orientation"
-msgstr "Orientación vivienda"
+msgstr "Orientación"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingHeatingSourceDhw:0
@@ -351,7 +351,7 @@ msgstr "Biomasa"
 #. module: empowering_api
 #: field:empowering.cups.building,buildingWindowsType:0
 msgid "Building windows type"
-msgstr "Tipo de ventanas del edificio"
+msgstr "Tipo de ventanas"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,dwellingOrientation:0
@@ -407,7 +407,7 @@ msgstr "Servicios Empowering"
 #. module: empowering_api
 #: field:empowering.cups.building,buildingSolarSystem:0
 msgid "Building solar system"
-msgstr "Edificio con sistema solar"
+msgstr "Edificio con sistema solar.FV"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingHeatingSource:0

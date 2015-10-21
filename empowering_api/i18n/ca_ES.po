@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.14\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2015-10-21 09:33:21+0000\n"
-"PO-Revision-Date: 2015-10-21 13:03+0100\n"
+"PO-Revision-Date: 2015-10-21 17:05+0100\n"
 "Last-Translator: Eduard Carreras <ecarreras@gisce.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr "Apartament"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,femalePersonsNumber:0
 msgid "Female persons number"
-msgstr "Nombre de persones de sexe femení"
+msgstr "Número de persones de sexe femení"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingWindowsType:0
@@ -82,7 +82,7 @@ msgstr ""
 #. module: empowering_api
 #: field:empowering.cups.building,buildingType:0
 msgid "Building type"
-msgstr "Tipus d'immoble"
+msgstr "Tipus d'habitatge"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT603g:0
@@ -102,7 +102,7 @@ msgstr "Nord-oest"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,malePersonsNumber:0
 msgid "Male persons number"
-msgstr "Nombre de persones del sexe masculí"
+msgstr "Número de persones del sexe masculí"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT701:0
@@ -112,7 +112,7 @@ msgstr "OT701"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,eduLevel_prim:0
 msgid "Primary education level persons number"
-msgstr "Nombre de persones amb educació primària"
+msgstr "Número de persones amb educació primària"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT703:0
@@ -163,7 +163,7 @@ msgstr "Any de construcció de l'edifici"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,eduLevel_noStudies:0
 msgid "No studies education level persons number"
-msgstr "Número de personas sin estudios"
+msgstr "Número de persones sense estudis"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,modcontractual_id:0
@@ -215,7 +215,7 @@ msgstr "Últim pis"
 #. module: empowering_api
 #: field:empowering.cups.building,buildingHeatingSource:0
 msgid "Building heating source"
-msgstr "Font de calefacció de l'edifici"
+msgstr "Font energia per calefacció"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT401:0
@@ -225,7 +225,7 @@ msgstr "OT401"
 #. module: empowering_api
 #: field:empowering.cups.building,buildingHeatingSourceDhw:0
 msgid "Building heating source dhw"
-msgstr "Font de calor de l'edifici ACS"
+msgstr "Font energia per ACS"
 
 #. module: empowering_api
 #: field:giscedata.polissa,empowering_profile:0
@@ -241,7 +241,7 @@ msgstr "OT106"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,eduLevel_uni:0
 msgid "University education level persons number"
-msgstr "Nombre de persones amb educació universitària"
+msgstr "Número de persones amb educació universitària"
 
 #. module: empowering_api
 #: field:empowering.cups.building,meteringPointId:0
@@ -266,7 +266,7 @@ msgstr "OT603"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,totalPersonsNumber:0
 msgid "Total persons number"
-msgstr "Nombre total de persones"
+msgstr "Número total de persones"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT204:0
@@ -286,7 +286,7 @@ msgstr "Invalid XML for View Architecture!"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,minorPersonsNumber:0
 msgid "Minor persons number"
-msgstr "Nombre de persones menors"
+msgstr "Número de persones menors"
 
 #. module: empowering_api
 #: model:ir.module.module,shortdesc:empowering_api.module_meta_information
@@ -321,7 +321,7 @@ msgstr "OT103"
 #. module: empowering_api
 #: field:empowering.cups.building,dwellingArea:0
 msgid "Dwelling area"
-msgstr "Àrea de vivenda"
+msgstr "Àrea"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT101:0
@@ -331,17 +331,17 @@ msgstr "OT101"
 #. module: empowering_api
 #: field:empowering.cups.building,dwellingPositionInBuilding:0
 msgid "Dwelling position in building"
-msgstr "Posició vivenda en l'edificio"
+msgstr "Posició de l'habitatge a l'edifici"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingType:0
 msgid "Single house"
-msgstr "Casa sola"
+msgstr "Casa"
 
 #. module: empowering_api
 #: field:empowering.cups.building,dwellingOrientation:0
 msgid "Dwelling orientation"
-msgstr "Orientació vivenda"
+msgstr "Orientació"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingHeatingSourceDhw:0
@@ -351,7 +351,7 @@ msgstr "Biomassa"
 #. module: empowering_api
 #: field:empowering.cups.building,buildingWindowsType:0
 msgid "Building windows type"
-msgstr "Tipus de finestres de l'edifici"
+msgstr "Tipus de finestres"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,dwellingOrientation:0
@@ -366,7 +366,7 @@ msgstr "empowering.modcontractual.profile"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,workingAgePersonsNumber:0
 msgid "Working age persons number"
-msgstr "Nombre de persones en edat de treballar"
+msgstr "Número de persones en edat de treballar"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,dwellingOrientation:0
@@ -391,7 +391,7 @@ msgstr "Alumini"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,eduLevel_sec:0
 msgid "Secondary education level persons number"
-msgstr "Nombre de persones amb educació secundària"
+msgstr "Número de persones amb educació secundària"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,dwellingPositionInBuilding:0
@@ -407,7 +407,7 @@ msgstr "Serveis Empowering"
 #. module: empowering_api
 #: field:empowering.cups.building,buildingSolarSystem:0
 msgid "Building solar system"
-msgstr "Edifici amb sistema solar"
+msgstr "Edifici amb sistema solar.FV"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingHeatingSource:0
@@ -417,7 +417,7 @@ msgstr "Biomassa"
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,retiredAgePersonsNumber:0
 msgid "Retired age persons number"
-msgstr "Nombre de persones jubiladas"
+msgstr "Número de persones jubilades"
 
 #. module: empowering_api
 #: field:giscedata.polissa,etag:0
