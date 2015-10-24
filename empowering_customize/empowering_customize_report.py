@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 
 from c2c_webkit_report import webkit_report
 from report import report_sxw
@@ -24,9 +25,11 @@ class ReportEmpoweringCustomize(webkit_report.WebKitParser):
         ])
         if channels_ids:
             channel = channel_obj.browse(cursor, uid, channels_ids[0])
-            report_xml.report_webkit = channel.template_id.path
+            tmpl = channel.template_id.path
         else:
-            report_xml.report_webkit = polissa.empowering_profile_id.default_template_id.path
+            tmpl = polissa.empowering_profile_id.default_template_id.path
+        self.tmpl = tmpl
+        report_xml.report_webkit = os.path.join(config['addons_path'], self.tmpl)
         return parent(cursor, uid, ids, data, report_xml, context)
 
 
