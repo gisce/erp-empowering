@@ -60,6 +60,7 @@ EmpoweringAPI()
 
 class EmpoweringCupsBuilding(osv.osv):
     _name = 'empowering.cups.building'
+    _rec_name = 'cups_id'
 
     _columns = {
         'cups_id': fields.many2one('giscedata.cups.ps', 'CUPS', required=True,
@@ -125,6 +126,7 @@ EmpoweringCupsBuilding()
 
 class EmpoweringModcontractualProfile(osv.osv):
     _name = 'empowering.modcontractual.profile'
+    _rec_name = 'modcontractual_id'
 
     _columns = {
         'modcontractual_id': fields.many2one('giscedata.polissa.modcontractual', 'Contract Modification', required=True,
