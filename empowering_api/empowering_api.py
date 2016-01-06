@@ -70,6 +70,9 @@ class EmpoweringCupsBuilding(osv.osv):
 
         'buildingConstructionYear': fields.integer('Building construction year'),
         'dwellingArea': fields.integer('Dwelling area'),
+        'propertyType': fields.selection([('primary', 'Primary residence'),
+                                          ('second', 'Second home')],
+                                         'Property type'),
         'buildingType': fields.selection([('Single_house', 'Single house'),
                                           ('Apartment', 'Apartment')],
                                          'Building type'),
@@ -99,12 +102,19 @@ class EmpoweringCupsBuilding(osv.osv):
                                                   ('steel', 'Steel'),
                                                   ('other', 'Other')],
                                                  'Building windows frame'),
+        'buildingCoolingSource': fields.selection([('electricity', 'Electricity'),
+                                                   ('gas', 'Gas'),
+                                                   ('district_cooling', 'District cooling'),
+                                                   ('other', 'Other'),
+                                                   ('not_installed', 'Not installed')],
+                                                  'Building cooling source'),
         'buildingHeatingSource': fields.selection([('electricity', 'Electricity'),
                                                    ('gas', 'Gas'),
                                                    ('gasoil', 'Gasoil'),
                                                    ('district_heating', 'District heating'),
                                                    ('biomass', 'Biomass'),
-                                                   ('other', 'Other')],
+                                                   ('other', 'Other'),
+                                                   ('not_installed', 'Not installed')],
                                                   'Building heating source'),
         'buildingHeatingSourceDhw': fields.selection([('electricity', 'Electricity'),
                                                       ('gas', 'Gas'),
@@ -113,12 +123,15 @@ class EmpoweringCupsBuilding(osv.osv):
                                                       ('biomass', 'Biomassa'),
                                                       ('other', 'Other')],
                                                      'Building heating source dhw'),
-        'buildingSolarSystem': fields.selection([('PV', 'FV'),
+        'buildingSolarSystem': fields.selection([('PV', 'PV'),
                                                  ('solar_thermal_heating', 'Solar thermal heating'),
                                                  ('solar_thermal_DHW', 'Solar thermal DHW'),
+                                                 ('PV_solar_thermal_DHW', 'PV + Solar thermal DHW'),
                                                  ('other', 'Other'),
                                                  ('not_installed', 'Not installed')],
-                                                'Building solar system')
+                                                'Building solar system'),
+        'electricVehicle': fields.boolean('Electric vehicle'),
+
     }
 
 EmpoweringCupsBuilding()

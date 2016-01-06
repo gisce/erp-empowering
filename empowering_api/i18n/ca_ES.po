@@ -1,50 +1,24 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-# 	* empowering_api
+#	* empowering_api
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.14\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2015-10-21 09:33:21+0000\n"
-"PO-Revision-Date: 2015-10-21 17:05+0100\n"
-"Last-Translator: Eduard Carreras <ecarreras@gisce.net>\n"
+"POT-Creation-Date: 2016-01-06 08:02:27+0000\n"
+"PO-Revision-Date: 2016-01-06 08:02:27+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
-"Language: ca_ES\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: empowering_api
-#: selection:empowering.cups.building,buildingWindowsFrame:0
-msgid "Steel"
-msgstr "Acer"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingSolarSystem:0
-msgid "Solar thermal heating"
-msgstr "Calefacción solar térmica"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingType:0
-msgid "Apartment"
-msgstr "Apartament"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.profile,femalePersonsNumber:0
-msgid "Female persons number"
-msgstr "Número de persones de sexe femení"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingWindowsType:0
-msgid "Low emittance"
-msgstr "Baixa emitància"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingWindowsType:0
-msgid "Triple panel"
-msgstr "Panell triple"
+#: selection:empowering.cups.building,dwellingOrientation:0
+msgid "Northeast"
+msgstr "Nord-est"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,modcontractual_id:0
@@ -52,47 +26,145 @@ msgid "Contract Modification"
 msgstr "Modificació del contracte"
 
 #. module: empowering_api
+#: field:empowering.modcontractual.service,OT603:0
+msgid "OT603"
+msgstr "OT603"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingCoolingSource:0
 #: selection:empowering.cups.building,buildingHeatingSource:0
-#: selection:empowering.cups.building,buildingHeatingSourceDhw:0
-msgid "Electricity"
-msgstr "Electricitat"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.service,OT502:0
-msgid "OT502"
-msgstr "OT502"
-
-#. module: empowering_api
-#: model:ir.model,name:empowering_api.model_empowering_modcontractual_service
-msgid "empowering.modcontractual.service"
-msgstr "empowering.modcontractual.service"
-
-#. module: empowering_api
 #: selection:empowering.cups.building,buildingSolarSystem:0
-msgid "V"
-msgstr "V"
+msgid "Not installed"
+msgstr "No instal·lat"
 
 #. module: empowering_api
-#: constraint:ir.model:0
-msgid ""
-"The Object name must start with x_ and not contain any special character !"
-msgstr ""
-"The Object name must start with x_ and not contain any special character !"
-
-#. module: empowering_api
-#: field:empowering.cups.building,buildingType:0
-msgid "Building type"
-msgstr "Tipus d'habitatge"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.service,OT603g:0
-msgid "OT603g"
-msgstr "OT603g"
+#: model:ir.model,name:empowering_api.model_empowering_cups_building
+msgid "empowering.cups.building"
+msgstr "empowering.cups.building"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,dwellingOrientation:0
-msgid "Northeast"
-msgstr "Nord-est"
+msgid "Southwest"
+msgstr "Sud-oest"
+
+#. module: empowering_api
+#: field:empowering.cups.building,buildingConstructionYear:0
+msgid "Building construction year"
+msgstr "Any de construcció de l'edifici"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingSolarSystem:0
+msgid "Solar thermal DHW"
+msgstr "Solar tèrmica per a l'aigua calenta"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingCoolingSource:0
+#: selection:empowering.cups.building,buildingHeatingSource:0
+#: selection:empowering.cups.building,buildingHeatingSourceDhw:0
+msgid "Gas"
+msgstr "Gas"
+
+#. module: empowering_api
+#: field:giscedata.lectures.comptador,empowering_last_measure:0
+msgid "Last meassure sent"
+msgstr "Última lectura enviada"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,dwellingPositionInBuilding:0
+msgid "Last floor"
+msgstr "Última planta"
+
+#. module: empowering_api
+#: field:giscedata.polissa,empowering_profile:0
+#: field:giscedata.polissa.modcontractual,empowering_profile:0
+msgid "Empowering profile"
+msgstr "Perfil Empowering"
+
+#. module: empowering_api
+#: field:empowering.cups.building,meteringPointId:0
+msgid "Metering point identifier"
+msgstr "Identificació del punt de subministrament"
+
+#. module: empowering_api
+#: field:empowering.modcontractual.service,OT204:0
+msgid "OT204"
+msgstr "OT204"
+
+#. module: empowering_api
+#: view:giscedata.polissa:0
+msgid "Empowering"
+msgstr "Empowering"
+
+#. module: empowering_api
+#: field:empowering.modcontractual.service,OT201:0
+msgid "OT201"
+msgstr "OT201"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingWindowsType:0
+msgid "Double panel"
+msgstr "Doble vidre"
+
+#. module: empowering_api
+#: field:empowering.cups.building,dwellingPositionInBuilding:0
+msgid "Dwelling position in building"
+msgstr "Posició de l'habitatge a l'edifici"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingWindowsType:0
+msgid "Single panel"
+msgstr "Vidre simple"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingWindowsFrame:0
+msgid "Aluminium"
+msgstr "Alumini"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingHeatingSource:0
+msgid "Biomass"
+msgstr "Biomassa"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingSolarSystem:0
+msgid "Solar thermal heating"
+msgstr "Solar tèrmica per calefacció"
+
+#. module: empowering_api
+#: field:empowering.modcontractual.profile,workingAgePersonsNumber:0
+msgid "Working age persons number"
+msgstr "Número de persones en edat de treballar"
+
+#. module: empowering_api
+#: model:ir.module.module,description:empowering_api.module_meta_information
+msgid "\n"
+"    This module provide :\n"
+"        * Integration between Empowering service\n"
+"    "
+msgstr "\n"
+"    This module provide :\n"
+"        * Integration between Empowering service\n"
+"    "
+
+#. module: empowering_api
+#: field:empowering.modcontractual.profile,eduLevel_sec:0
+msgid "Secondary education level persons number"
+msgstr "Número de persones amb educació secundària"
+
+#. module: empowering_api
+#: field:empowering.modcontractual.profile,femalePersonsNumber:0
+msgid "Female persons number"
+msgstr "Número de persones del sexe femení"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingWindowsType:0
+msgid "Low emittance"
+msgstr "Baixa emitància"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,dwellingOrientation:0
+msgid "West"
+msgstr "Oest"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,dwellingOrientation:0
@@ -110,11 +182,6 @@ msgid "OT701"
 msgstr "OT701"
 
 #. module: empowering_api
-#: field:empowering.modcontractual.profile,eduLevel_prim:0
-msgid "Primary education level persons number"
-msgstr "Número de persones amb educació primària"
-
-#. module: empowering_api
 #: field:empowering.modcontractual.service,OT703:0
 msgid "OT703"
 msgstr "OT703"
@@ -126,18 +193,112 @@ msgstr "CUPS"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingSolarSystem:0
-msgid "Not installed"
-msgstr "No instal·lat"
+msgid "PV"
+msgstr "FV"
 
 #. module: empowering_api
-#: model:ir.model,name:empowering_api.model_empowering_cups_building
-msgid "empowering.cups.building"
-msgstr "empowering.cups.building"
+#: selection:empowering.cups.building,dwellingOrientation:0
+msgid "Southeast"
+msgstr "Sud-est"
 
 #. module: empowering_api
-#: field:empowering.modcontractual.service,OT201:0
-msgid "OT201"
-msgstr "OT201"
+#: field:empowering.cups.building,buildingHeatingSourceDhw:0
+msgid "Building heating source dhw"
+msgstr "Font d'energia per a l'aigua calenta"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingSolarSystem:0
+msgid "PV + Solar thermal DHW"
+msgstr "FV + Solar tèrmica per a l'aigua calenta"
+
+#. module: empowering_api
+#: field:empowering.modcontractual.profile,totalPersonsNumber:0
+msgid "Total persons number"
+msgstr "Número total de persones"
+
+#. module: empowering_api
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "Invalid XML for View Architecture!"
+
+#. module: empowering_api
+#: model:ir.module.module,shortdesc:empowering_api.module_meta_information
+msgid "Empowering API"
+msgstr "Empowering API"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,dwellingPositionInBuilding:0
+msgid "First floor"
+msgstr "Primera planta"
+
+#. module: empowering_api
+#: model:ir.model,name:empowering_api.model_empowering_modcontractual_profile
+msgid "empowering.modcontractual.profile"
+msgstr "empowering.modcontractual.profile"
+
+#. module: empowering_api
+#: field:empowering.cups.building,dwellingOrientation:0
+msgid "Dwelling orientation"
+msgstr "Orientació"
+
+#. module: empowering_api
+#: field:empowering.cups.building,buildingWindowsType:0
+msgid "Building windows type"
+msgstr "Tipus de finestres"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,propertyType:0
+msgid "Primary residence"
+msgstr "Primera residència"
+
+#. module: empowering_api
+#: field:empowering.cups.building,dwellingArea:0
+msgid "Dwelling area"
+msgstr "Superfície"
+
+#. module: empowering_api
+#: field:empowering.cups.building,buildingSolarSystem:0
+msgid "Building solar system"
+msgstr "Edifici amb sistema solar"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingType:0
+msgid "Apartment"
+msgstr "Apartament"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingHeatingSource:0
+#: selection:empowering.cups.building,buildingHeatingSourceDhw:0
+msgid "Gasoil"
+msgstr "Gasoil"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingCoolingSource:0
+#: selection:empowering.cups.building,buildingHeatingSource:0
+#: selection:empowering.cups.building,buildingHeatingSourceDhw:0
+msgid "Electricity"
+msgstr "Electricitat"
+
+#. module: empowering_api
+#: field:empowering.cups.building,buildingType:0
+msgid "Building type"
+msgstr "Tipus d'habitatge"
+
+#. module: empowering_api
+#: model:ir.model,name:empowering_api.model_empowering_modcontractual_service
+msgid "empowering.modcontractual.service"
+msgstr "empowering.modcontractual.service"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingCoolingSource:0
+#: selection:empowering.cups.building,buildingHeatingSource:0
+#: selection:empowering.cups.building,buildingHeatingSourceDhw:0
+#: selection:empowering.cups.building,buildingSolarSystem:0
+#: selection:empowering.cups.building,buildingWindowsFrame:0
+#: selection:empowering.cups.building,buildingWindowsType:0
+#: selection:empowering.cups.building,dwellingPositionInBuilding:0
+msgid "Other"
+msgstr "Altre"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingHeatingSource:0
@@ -147,18 +308,83 @@ msgstr "Calefacció urbana"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,dwellingOrientation:0
-msgid "West"
-msgstr "Oest"
+msgid "North"
+msgstr "Nord"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingCoolingSource:0
+msgid "District cooling"
+msgstr "Refrigeració urbana"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingWindowsFrame:0
+msgid "PVC"
+msgstr "PVC"
+
+#. module: empowering_api
+#: field:empowering.modcontractual.profile,eduLevel_uni:0
+msgid "University education level persons number"
+msgstr "Número de persones amb educació universitària"
+
+#. module: empowering_api
+#: model:ir.model,name:empowering_api.model_empowering_api
+msgid "empowering.api"
+msgstr "empowering.api"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingWindowsFrame:0
+msgid "Steel"
+msgstr "Acer"
+
+#. module: empowering_api
+#: field:empowering.cups.building,buildingCoolingSource:0
+msgid "Building cooling source"
+msgstr "Font d'energia per a la refrigeració"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,dwellingPositionInBuilding:0
+msgid "Middle floor"
+msgstr "Planta intermitja"
+
+#. module: empowering_api
+#: field:empowering.modcontractual.profile,retiredAgePersonsNumber:0
+msgid "Retired age persons number"
+msgstr "Número de persones jubilades"
+
+#. module: empowering_api
+#: field:empowering.modcontractual.service,OT401:0
+msgid "OT401"
+msgstr "OT401"
+
+#. module: empowering_api
+#: constraint:ir.model:0
+msgid "The Object name must start with x_ and not contain any special character !"
+msgstr "The Object name must start with x_ and not contain any special character !"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingWindowsType:0
+msgid "Triple panel"
+msgstr "Triple vidre"
+
+#. module: empowering_api
+#: field:empowering.modcontractual.service,OT503:0
+msgid "OT503"
+msgstr "OT503"
+
+#. module: empowering_api
+#: field:empowering.modcontractual.service,OT502:0
+msgid "OT502"
+msgstr "OT502"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingWindowsFrame:0
+msgid "Wood"
+msgstr "Fusta"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,dwellingOrientation:0
 msgid "East"
 msgstr "Est"
-
-#. module: empowering_api
-#: field:empowering.cups.building,buildingConstructionYear:0
-msgid "Building construction year"
-msgstr "Any de construcció de l'edifici"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,eduLevel_noStudies:0
@@ -171,117 +397,29 @@ msgid "Contract modification"
 msgstr "Modificació del contracte"
 
 #. module: empowering_api
-#: selection:empowering.cups.building,buildingSolarSystem:0
-msgid "Solar thermal DHW"
-msgstr "ACS solar tèrmica"
-
-#. module: empowering_api
 #: field:empowering.cups.building,buildingWindowsFrame:0
 msgid "Building windows frame"
-msgstr "Marc de les finestres"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingHeatingSource:0
-#: selection:empowering.cups.building,buildingHeatingSourceDhw:0
-msgid "Gasoil"
-msgstr "Gasoil"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingHeatingSource:0
-#: selection:empowering.cups.building,buildingHeatingSourceDhw:0
-msgid "Gas"
-msgstr "Gas"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.service,OT503:0
-msgid "OT503"
-msgstr "OT503"
-
-#. module: empowering_api
-#: field:giscedata.lectures.comptador,empowering_last_measure:0
-msgid "Last meassure sent"
-msgstr "Última lectura enviada"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingWindowsFrame:0
-msgid "Wood"
-msgstr "Fusta"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,dwellingPositionInBuilding:0
-msgid "Last floor"
-msgstr "Últim pis"
+msgstr "Tipus de marc de les finestres"
 
 #. module: empowering_api
 #: field:empowering.cups.building,buildingHeatingSource:0
 msgid "Building heating source"
-msgstr "Font energia per calefacció"
+msgstr "Font d'energia per a la calefacció"
 
 #. module: empowering_api
-#: field:empowering.modcontractual.service,OT401:0
-msgid "OT401"
-msgstr "OT401"
+#: field:giscedata.polissa,etag:0
+msgid "ETag"
+msgstr "ETag"
 
 #. module: empowering_api
-#: field:empowering.cups.building,buildingHeatingSourceDhw:0
-msgid "Building heating source dhw"
-msgstr "Font energia per ACS"
+#: field:empowering.modcontractual.profile,eduLevel_prim:0
+msgid "Primary education level persons number"
+msgstr "Número de persones amb educació primària"
 
 #. module: empowering_api
-#: field:giscedata.polissa,empowering_profile:0
-#: field:giscedata.polissa.modcontractual,empowering_profile:0
-msgid "Empowering profile"
-msgstr "Perfil Empowering"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.service,OT106:0
-msgid "OT106"
-msgstr "OT106"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.profile,eduLevel_uni:0
-msgid "University education level persons number"
-msgstr "Número de persones amb educació universitària"
-
-#. module: empowering_api
-#: field:empowering.cups.building,meteringPointId:0
-msgid "Metering point identifier"
-msgstr "Identificació del punt de subministrament"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingWindowsType:0
-msgid "Single panel"
-msgstr "Panell individual"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingWindowsFrame:0
-msgid "PVC"
-msgstr "PVC"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.service,OT603:0
-msgid "OT603"
-msgstr "OT603"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.profile,totalPersonsNumber:0
-msgid "Total persons number"
-msgstr "Número total de persones"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.service,OT204:0
-msgid "OT204"
-msgstr "OT204"
-
-#. module: empowering_api
-#: view:giscedata.polissa:0
-msgid "Empowering"
-msgstr "Empowering"
-
-#. module: empowering_api
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
-msgstr "Invalid XML for View Architecture!"
+#: selection:empowering.cups.building,propertyType:0
+msgid "Second home"
+msgstr "Segona residència"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,minorPersonsNumber:0
@@ -289,24 +427,14 @@ msgid "Minor persons number"
 msgstr "Número de persones menors"
 
 #. module: empowering_api
-#: model:ir.module.module,shortdesc:empowering_api.module_meta_information
-msgid "Empowering API"
-msgstr "Empowering API"
-
-#. module: empowering_api
 #: field:empowering.modcontractual.service,OT109:0
 msgid "OT109"
 msgstr "OT109"
 
 #. module: empowering_api
-#: selection:empowering.cups.building,dwellingPositionInBuilding:0
-msgid "First floor"
-msgstr "Primera planta"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingWindowsType:0
-msgid "Double panel"
-msgstr "Panell doble"
+#: field:empowering.modcontractual.service,OT106:0
+msgid "OT106"
+msgstr "OT106"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT105:0
@@ -319,19 +447,9 @@ msgid "OT103"
 msgstr "OT103"
 
 #. module: empowering_api
-#: field:empowering.cups.building,dwellingArea:0
-msgid "Dwelling area"
-msgstr "Àrea"
-
-#. module: empowering_api
 #: field:empowering.modcontractual.service,OT101:0
 msgid "OT101"
 msgstr "OT101"
-
-#. module: empowering_api
-#: field:empowering.cups.building,dwellingPositionInBuilding:0
-msgid "Dwelling position in building"
-msgstr "Posició de l'habitatge a l'edifici"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingType:0
@@ -339,64 +457,19 @@ msgid "Single house"
 msgstr "Casa"
 
 #. module: empowering_api
-#: field:empowering.cups.building,dwellingOrientation:0
-msgid "Dwelling orientation"
-msgstr "Orientació"
-
-#. module: empowering_api
 #: selection:empowering.cups.building,buildingHeatingSourceDhw:0
 msgid "Biomassa"
 msgstr "Biomassa"
 
 #. module: empowering_api
-#: field:empowering.cups.building,buildingWindowsType:0
-msgid "Building windows type"
-msgstr "Tipus de finestres"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,dwellingOrientation:0
-msgid "North"
-msgstr "Nord"
-
-#. module: empowering_api
-#: model:ir.model,name:empowering_api.model_empowering_modcontractual_profile
-msgid "empowering.modcontractual.profile"
-msgstr "empowering.modcontractual.profile"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.profile,workingAgePersonsNumber:0
-msgid "Working age persons number"
-msgstr "Número de persones en edat de treballar"
+#: field:empowering.cups.building,propertyType:0
+msgid "Property type"
+msgstr "Tipus de residència"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,dwellingOrientation:0
 msgid "South"
 msgstr "Sud"
-
-#. module: empowering_api
-#: field:giscedata.polissa,cups_poblacio:0
-msgid "Població"
-msgstr "Població"
-
-#. module: empowering_api
-#: model:ir.model,name:empowering_api.model_empowering_api
-msgid "empowering.api"
-msgstr "empowering.api"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingWindowsFrame:0
-msgid "Aluminium"
-msgstr "Alumini"
-
-#. module: empowering_api
-#: field:empowering.modcontractual.profile,eduLevel_sec:0
-msgid "Secondary education level persons number"
-msgstr "Número de persones amb educació secundària"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,dwellingPositionInBuilding:0
-msgid "Middle floor"
-msgstr "Piso intermig"
 
 #. module: empowering_api
 #: field:giscedata.polissa,empowering_service:0
@@ -405,59 +478,12 @@ msgid "Empowering services"
 msgstr "Serveis Empowering"
 
 #. module: empowering_api
-#: field:empowering.cups.building,buildingSolarSystem:0
-msgid "Building solar system"
-msgstr "Edifici amb sistema solar"
+#: field:empowering.modcontractual.service,OT603g:0
+msgid "OT603g"
+msgstr "OT603g"
 
 #. module: empowering_api
-#: selection:empowering.cups.building,buildingHeatingSource:0
-msgid "Biomass"
-msgstr "Biomassa"
+#: field:empowering.cups.building,electricVehicle:0
+msgid "Electric vehicle"
+msgstr "Vehicle elèctric"
 
-#. module: empowering_api
-#: field:empowering.modcontractual.profile,retiredAgePersonsNumber:0
-msgid "Retired age persons number"
-msgstr "Número de persones jubilades"
-
-#. module: empowering_api
-#: field:giscedata.polissa,etag:0
-msgid "ETag"
-msgstr "ETag"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,dwellingOrientation:0
-msgid "Southwest"
-msgstr "Sud-est"
-
-#. module: empowering_api
-#: model:ir.module.module,description:empowering_api.module_meta_information
-msgid ""
-"\n"
-"    This module provide :\n"
-"        * Integration between Empowering service\n"
-"    "
-msgstr ""
-"\n"
-"    This module provide :\n"
-"        * Integration between Empowering service\n"
-"    "
-
-#. module: empowering_api
-#: field:giscedata.polissa,cups_cp:0
-msgid "Codi Postal"
-msgstr "Codi Postal"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,buildingHeatingSource:0
-#: selection:empowering.cups.building,buildingHeatingSourceDhw:0
-#: selection:empowering.cups.building,buildingSolarSystem:0
-#: selection:empowering.cups.building,buildingWindowsFrame:0
-#: selection:empowering.cups.building,buildingWindowsType:0
-#: selection:empowering.cups.building,dwellingPositionInBuilding:0
-msgid "Other"
-msgstr "Altre"
-
-#. module: empowering_api
-#: selection:empowering.cups.building,dwellingOrientation:0
-msgid "Southeast"
-msgstr "Sud-est"
