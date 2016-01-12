@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.14\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2016-01-06 08:01:41+0000\n"
-"PO-Revision-Date: 2016-01-06 08:01:41+0000\n"
+"POT-Creation-Date: 2016-01-11 11:45:17+0000\n"
+"PO-Revision-Date: 2016-01-11 11:45:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -56,6 +56,11 @@ msgstr "Año de construcción del edificio"
 #: selection:empowering.cups.building,buildingSolarSystem:0
 msgid "Solar thermal DHW"
 msgstr "Solar térmica para el agua caliente"
+
+#. module: empowering_api
+#: field:giscedata.cups.ps,empowering_quarantine:0
+msgid "Quarantine state"
+msgstr "Estado en cuarentena"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingCoolingSource:0
@@ -290,17 +295,6 @@ msgid "empowering.modcontractual.service"
 msgstr "empowering.modcontractual.service"
 
 #. module: empowering_api
-#: selection:empowering.cups.building,buildingCoolingSource:0
-#: selection:empowering.cups.building,buildingHeatingSource:0
-#: selection:empowering.cups.building,buildingHeatingSourceDhw:0
-#: selection:empowering.cups.building,buildingSolarSystem:0
-#: selection:empowering.cups.building,buildingWindowsFrame:0
-#: selection:empowering.cups.building,buildingWindowsType:0
-#: selection:empowering.cups.building,dwellingPositionInBuilding:0
-msgid "Other"
-msgstr "Otro"
-
-#. module: empowering_api
 #: selection:empowering.cups.building,buildingHeatingSource:0
 #: selection:empowering.cups.building,buildingHeatingSourceDhw:0
 msgid "District heating"
@@ -310,6 +304,11 @@ msgstr "Calefacción urbana"
 #: selection:empowering.cups.building,dwellingOrientation:0
 msgid "North"
 msgstr "Norte"
+
+#. module: empowering_api
+#: field:giscedata.cups.ps,empowering:0
+msgid "Empowering enabled"
+msgstr "Servicio habilitado"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,buildingCoolingSource:0
@@ -322,9 +321,9 @@ msgid "PVC"
 msgstr "PVC"
 
 #. module: empowering_api
-#: field:empowering.modcontractual.profile,eduLevel_uni:0
-msgid "University education level persons number"
-msgstr "Número de personas con educación universitaria"
+#: field:empowering.cups.quarantine,active:0
+msgid "Active"
+msgstr "Activa"
 
 #. module: empowering_api
 #: model:ir.model,name:empowering_api.model_empowering_api
@@ -342,6 +341,16 @@ msgid "Building cooling source"
 msgstr "Fuente de energía para la refrigeración"
 
 #. module: empowering_api
+#: field:empowering.modcontractual.profile,eduLevel_uni:0
+msgid "University education level persons number"
+msgstr "Número de personas con educación universitaria"
+
+#. module: empowering_api
+#: field:empowering.cups.quarantine,code:0
+msgid "Code"
+msgstr "Código"
+
+#. module: empowering_api
 #: selection:empowering.cups.building,dwellingPositionInBuilding:0
 msgid "Middle floor"
 msgstr "Planta intermedio"
@@ -355,6 +364,11 @@ msgstr "Número de personas jubiladas"
 #: field:empowering.modcontractual.service,OT401:0
 msgid "OT401"
 msgstr "OT401"
+
+#. module: empowering_api
+#: model:ir.model,name:empowering_api.model_empowering_cups_quarantine
+msgid "empowering.cups.quarantine"
+msgstr "empowering.cups.quarantine"
 
 #. module: empowering_api
 #: constraint:ir.model:0
@@ -377,14 +391,25 @@ msgid "OT502"
 msgstr "OT502"
 
 #. module: empowering_api
+#: selection:empowering.cups.building,buildingCoolingSource:0
+#: selection:empowering.cups.building,buildingHeatingSource:0
+#: selection:empowering.cups.building,buildingHeatingSourceDhw:0
+#: selection:empowering.cups.building,buildingSolarSystem:0
 #: selection:empowering.cups.building,buildingWindowsFrame:0
-msgid "Wood"
-msgstr "Madera"
+#: selection:empowering.cups.building,buildingWindowsType:0
+#: selection:empowering.cups.building,dwellingPositionInBuilding:0
+msgid "Other"
+msgstr "Otro"
 
 #. module: empowering_api
 #: selection:empowering.cups.building,dwellingOrientation:0
 msgid "East"
 msgstr "Este"
+
+#. module: empowering_api
+#: field:empowering.cups.quarantine,description:0
+msgid "Description"
+msgstr "Descripción"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.profile,eduLevel_noStudies:0
@@ -400,6 +425,11 @@ msgstr "Modificación del contrato"
 #: field:empowering.cups.building,buildingWindowsFrame:0
 msgid "Building windows frame"
 msgstr "Marco de las ventanas"
+
+#. module: empowering_api
+#: selection:empowering.cups.building,buildingWindowsFrame:0
+msgid "Wood"
+msgstr "Madera"
 
 #. module: empowering_api
 #: field:empowering.cups.building,buildingHeatingSource:0
@@ -425,6 +455,11 @@ msgstr "Segunda residencia"
 #: field:empowering.modcontractual.profile,minorPersonsNumber:0
 msgid "Minor persons number"
 msgstr "Número de personas menores"
+
+#. module: empowering_api
+#: field:empowering.cups.quarantine,name:0
+msgid "Name"
+msgstr "Name"
 
 #. module: empowering_api
 #: field:empowering.modcontractual.service,OT109:0
