@@ -25,7 +25,7 @@ class GiscedataCupsPs(osv.osv):
     }
 
     _defaults = {
-        'empowering': lambda *a: False,
+        'empowering': lambda *a: True,
         'empowering_quarantine': lambda *a: 0,
     }
 GiscedataCupsPs()
