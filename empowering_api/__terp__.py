@@ -11,7 +11,7 @@
     """,
     "init_xml": [],
     'update_xml': ["giscedata_polissa_view.xml", "security/empowering_api_security.xml",
-                   "security/ir.model.access.csv"],
+                   "security/ir.model.access.csv", "giscedata_cups_data.xml"],
     'demo_xml': [],
     'installable': True,
     'active': False,

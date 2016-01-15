@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+      <record model="empowering.cups.quarantine" id="emp_cups_quarantine_00">
+        <field name="code">0</field>
+        <field name="name">not_in_quarantine</field>
+        <field name="description">Contract not in quarantine</field>
+      </record>
+      <record model="empowering.cups.quarantine" id="emp_cups_quarantine_01">
+        <field name="code">1</field>
+        <field name="name">not_enough_data</field>
+        <field name="description">Contract without enough data</field>
+      </record>
+      <record model="empowering.cups.quarantine" id="emp_cups_quarantine_02">
+        <field name="code">2</field>
+        <field name="name">failed_push</field>
+        <field name="description">Failed data push</field>
+      </record>
+      <record model="empowering.cups.quarantine" id="emp_cups_quarantine_03">
+        <field name="code">3</field>
+        <field name="name">failed_pull</field>
+        <field name="description">Failed data pull</field>
+      </record>
+    </data>
+</openerp>
