@@ -73,6 +73,7 @@ EmpoweringCustomizeChannel()
 
 class EmpoweringCustomizeProfileChannel(osv.osv):
     _name = 'empowering.customize.profile.channel'
+    _rec_name = 'channel_id'
     _columns = {
         'profile_id': fields.many2one(
             'empowering.customize.profile',
@@ -100,6 +101,7 @@ EmpoweringCustomizeProfileChannel()
 
 class EmpoweringCustomizeProfileChannelLog(osv.osv):
     _name = 'empowering.customize.profile.channel.log'
+    _rec_name = 'contract_id'
 
     _columns = {
         'contract_id': fields.many2one(
@@ -110,7 +112,25 @@ class EmpoweringCustomizeProfileChannelLog(osv.osv):
             'empowering.customize.profile.channel',
             'Channel'
         ),
-        'last_generated': fields.datetime('Last generated')
+        'last_generated': fields.datetime('Last generated'),
+        'mail_id': fields.many2one(
+            'poweremail.mailbox', 'Mail'
+        ),
+        'sent': fields.boolean('Sent'),
+        'date_sent': fields.date('Date sent'),
+        'folder': fields.selection([
+            ('inbox', 'Inbox'),
+            ('drafts', 'Drafts'),
+            ('outbox', 'Outbox'),
+            ('trash', 'Trash'),
+            ('followup', 'Follow Up'),
+            ('sent', 'Sent Items')], 'Folder'),
     }
+
+    _defaults = {
+        'sent': lambda *a: 0,
+    }
+
+    _order = 'last_generated desc'
 
 EmpoweringCustomizeProfileChannelLog()

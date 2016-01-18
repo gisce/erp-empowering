@@ -11,4 +11,37 @@
             <field name="orientation">Portrait</field>
         </record>
     </data>
+    <data noupdate="0">
+        <record model="poweremail.templates" id="env_empowering_report">
+            <field name="name">Enviar report Empowering</field>
+            <field name="object_name" model="ir.model" search="[('model', '=', 'giscedata.polissa')]"/>
+            <field eval="0" name="save_to_drafts"/>
+            <field name="model_int_name">giscedata.polissa</field>
+            <field eval="0" name="use_filter"/>
+            <field name="file_name">INFORENERGIA_${env['user']._context.get('empowering_channel')}_${env['user']._context.get('period')}</field>
+            <field name="def_to">${object.pagador_email}</field>
+            <field eval="0" name="auto_email"/>
+            <field eval="1" name="single_email"/>
+            <field name="report_template" model="ir.actions.report.xml" ref="report_empowering_customize"/>
+            <field eval="0" name="use_sign"/>
+            <field name="def_subject">INFOENERGIA ${env['user']._context.get('period')} (${env['user']._context.get('empowering_channel')})</field>
+            <field name="template_language">mako</field>
+            <field eval="0" name="send_on_create"/>
+            <field name="lang">${object.pagador.lang}</field>
+            <field eval="0" name="send_on_write"/>
+            <field name="def_body_text">
+    <![CDATA[
+    <!doctype html>
+    <html>
+    <head></head>
+    <body>
+    Benvolgut/da ${object.direccio_pagament.name},
+
+    Informe energètic
+
+    </body>
+    </html>
+    ]]></field>
+        </record>
+    </data>
 </openerp>
