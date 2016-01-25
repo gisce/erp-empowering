@@ -55,7 +55,9 @@ class GiscedataPolissa(osv.osv):
                     last_generated += relativedelta(**{measure: number})
                     if last_generated > now:
                         continue
-                period = now.strftime('%Y%m')
+                period = context.get('period')
+                if not period:
+                    period = now.strftime('%Y%m')
                 channel_code = channel.channel_id.code
 
                 template_id = imd_obj.get_object_reference(
