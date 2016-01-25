@@ -14,6 +14,7 @@
                         <page string="General">
                             <field name="channel_id" select="1"/>
                             <field name="template_id"/>
+                            <field name="interval_id"/>
                         </page>
                     </notebook>
                 </form>
@@ -27,6 +28,7 @@
                 <tree string="Profile channel">
                     <field name="channel_id"/>
                     <field name="template_id"/>
+                    <field name="interval_id"/>
                 </tree>
             </field>
         </record>
