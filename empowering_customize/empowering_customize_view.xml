@@ -175,5 +175,38 @@
             <field name="view_id" ref="view_empowering_customize_interval_tree"/>
         </record>
         <menuitem name="Intervals" action="action_empowering_customize_interval_tree" id="menu_empowering_customize_interval_tree" parent="menu_empowering_customize"/>
+
+        <record model="ir.ui.view" id="view_empowering_customize_profile_channel_log_form">
+            <field name="name">empowering_customize_profile_channel_log.form</field>
+            <field name="model">empowering.customize.profile.channel.log</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Channel log">
+                    <field name="contract_id" select="1"/>
+                    <field name="channel_id" select="1"/>
+                    <field name="last_generated" select="1"/>
+                    <field name="mail_id"/>
+                    <field name="sent"/>
+                    <field name="date_sent" select="1"/>
+                    <field name="folder" select="1"/>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_empowering_customize_profile_channel_log_tree">
+            <field name="name">empowering_customize_profile_channel_log.tree</field>
+            <field name="model">empowering.customize.profile.channel.log</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Channel logs">
+                    <field name="contract_id"/>
+                    <field name="channel_id"/>
+                    <field name="last_generated"/>
+                    <field name="mail_id"/>
+                    <field name="sent"/>
+                    <field name="date_sent"/>
+                    <field name="folder"/>
+                </tree>
+            </field>
+        </record>
     </data>
 </openerp>

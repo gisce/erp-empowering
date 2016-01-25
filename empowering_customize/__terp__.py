@@ -7,7 +7,14 @@
   "version": "0-dev",
   "author": "GISCE",
   "category": "Master",
-  "depends": ["base", "empowering_api", "giscedata_polissa", "c2c_webkit_report"],
+  "depends": [
+      "base",
+      "empowering_api",
+      "giscedata_polissa",
+      "c2c_webkit_report",
+      "poweremail",
+      "poweremail_references"
+  ],
   "init_xml": [],
   "demo_xml": [],
   "update_xml": [
