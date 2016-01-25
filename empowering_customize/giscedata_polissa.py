@@ -48,7 +48,7 @@ class GiscedataPolissa(osv.osv):
                     ], ['last_generated'], order='last_generated desc', limit=1)
                     if cl:
                         last_generated = datetime.strptime(
-                            cl[0]['last_generated'], '%Y-%m-%d'
+                            cl[0]['last_generated'], '%Y-%m-%d %H:%M:%S'
                         )
                     else:
                         last_generated = datetime(1, 1, 1)
