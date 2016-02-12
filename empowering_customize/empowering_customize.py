@@ -112,6 +112,7 @@ class EmpoweringCustomizeProfileChannelLog(osv.osv):
             'empowering.customize.profile.channel',
             'Channel'
         ),
+        'period': fields.integer('Period reported'),
         'last_generated': fields.datetime('Last generated'),
         'mail_id': fields.many2one(
             'poweremail.mailbox', 'Mail'
