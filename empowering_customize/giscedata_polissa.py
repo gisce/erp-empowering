@@ -93,6 +93,7 @@ class GiscedataPolissa(osv.osv):
         log_obj = self.pool.get('empowering.customize.profile.channel.log')
         channel_obj = self.pool.get('empowering.customize.profile.channel')
         channel_code = context.get('empowering_channel')
+        period = context.get('period')
         if channel_code:
             channel_id = channel_obj.search(cursor, uid, [
                 ('channel_id.code', '=', channel_code)
@@ -105,6 +106,7 @@ class GiscedataPolissa(osv.osv):
             log_obj.create(cursor, uid, {
                 'contract_id': polissa_id,
                 'channel_id': channel_id,
+                'period': period, 
                 'last_generated': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                 'mail_id': origin_ids.get(polissa_id, False),
                 'date_sent': vals.get('date_mail'),
