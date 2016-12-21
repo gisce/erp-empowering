@@ -10,6 +10,12 @@ def log(msg, level=netsvc.LOG_INFO):
     logger = netsvc.Logger()
     logger.notifyChannel('empowering', level, msg)
 
+class FakeEmpoweringService(object):
+    def __init__(self):
+        self.ot101_results = False
+        self.ot103_results = False
+        self.ot201_results = False
+        self.ot503_results = False
 
 class EmpoweringAPI(osv.osv):
     _name = 'empowering.api'
@@ -37,13 +43,17 @@ class EmpoweringAPI(osv.osv):
             emp_conf['username'] = self.username
             emp_conf['password'] = self.password
 
-        self.service = setup_empowering_api(**emp_conf)
-        log("Setting Up Empowering Service (%s). Company-Id: %s Cert file: %s"
-            % (self.service.apiroot, self.service.company_id,
-               self.service.cert_file))
-        for k, v in context.get('empowering_args', {}).items():
-            log("%s => %s" % (k, v))
-            setattr(self.service, k, v)
+        try:
+            self.service = setup_empowering_api(**emp_conf)
+            log("Setting Up Empowering Service (%s). Company-Id: %s Cert file: %s"
+                % (self.service.apiroot, self.service.company_id,
+                   self.service.cert_file))
+            for k, v in context.get('empowering_args', {}).items():
+                log("%s => %s" % (k, v))
+                setattr(self.service, k, v)
+        except:
+            self.service = FakeEmpoweringService()
+
 
     def __init__(self, pool, cursor):
         self.username = None
