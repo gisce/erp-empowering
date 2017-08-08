@@ -2,6 +2,7 @@
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import logging
+import pooler
 
 from osv import osv, fields
 
@@ -22,7 +23,7 @@ class GiscedataPolissa(osv.osv):
         )
     }
 
-    def send_empowering_report(self, cursor, uid, ids, context=None):
+    def send_empowering_report(self, cursor, uid, reports, context=None):
         if context is None:
             context = {}
 
@@ -33,10 +34,32 @@ class GiscedataPolissa(osv.osv):
         cl_obj = self.pool.get('empowering.customize.profile.channel.log')
         pe_send_obj = self.pool.get('poweremail.send.wizard')
         imd_obj = self.pool.get('ir.model.data')
+        attach_obj = self.pool.get('ir.attachment')
 
-        for polissa in self.browse(cursor, uid, ids, context=context):
+        for report in reports:
+            polissa = self.browse(cursor, uid, report['contract_id'],
+                context=context)
             if not polissa.empowering_profile_id:
                 continue
+
+            vals = {
+                'name': report['report_name'],
+                'datas': report['pdf'],
+                'datas_fname': report['report_name'],
+                'res_model': 'giscedata.polissa',
+                'res_id': polissa.id
+            }
+            try:
+                db = pooler.get_db_only(cursor.dbname)
+                cr_new = None
+                cr_new = db.cursor()
+                attachment_id = attach_obj.create(cr_new, uid, vals, context)
+                cr_new.commit()
+            except:
+                if not cr_new:
+                    cr_new.rollback()
+            finally:
+                cr_new.close()
             now = datetime.now()
             for channel in polissa.empowering_profile_id.channels_ids:
                 measure = channel.interval_id.measure
@@ -58,6 +81,7 @@ class GiscedataPolissa(osv.osv):
                 period = context.get('period')
                 if not period:
                     period = now.strftime('%Y%m')
+                body_personal = context.get('body_personal', '')
                 channel_code = channel.channel_id.code
 
                 template_id = imd_obj.get_object_reference(
@@ -67,6 +91,7 @@ class GiscedataPolissa(osv.osv):
                 ctx = context.copy()
                 ctx.update({
                     'period': period,
+                    'body_personal': body_personal,
                     'empowering_channel': channel_code,
                     'src_rec_ids': [polissa.id],
                     'src_model': 'giscedata.polissa',
@@ -81,6 +106,8 @@ class GiscedataPolissa(osv.osv):
                     )
                 )
                 send_id = pe_send_obj.create(cursor, uid, {}, context=ctx)
+                pe_send_obj.write(cursor, uid, [send_id],
+                    {'attachment_ids': [(6, 0, [attachment_id])]}, context=ctx)
                 sender = pe_send_obj.browse(cursor, uid, send_id, context=ctx)
                 sender.send_mail(context=ctx)
 
@@ -94,19 +121,19 @@ class GiscedataPolissa(osv.osv):
         channel_obj = self.pool.get('empowering.customize.profile.channel')
         channel_code = context.get('empowering_channel')
         period = context.get('period')
-        if channel_code:
-            channel_id = channel_obj.search(cursor, uid, [
-                ('channel_id.code', '=', channel_code)
-            ])[0]
-        else:
-            channel_id = False
+        if not channel_code:
+            return True
+
+        channel_id = channel_obj.search(cursor, uid, [
+            ('channel_id.code', '=', channel_code)
+        ])[0]
         folder = vals.get('folder', False)
         origin_ids = context.get('pe_callback_origin_ids', {})
         for polissa_id in ids:
             log_obj.create(cursor, uid, {
                 'contract_id': polissa_id,
                 'channel_id': channel_id,
-                'period': period, 
+                'period': period,
                 'last_generated': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                 'mail_id': origin_ids.get(polissa_id, False),
                 'date_sent': vals.get('date_mail'),
