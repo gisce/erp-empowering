@@ -81,7 +81,8 @@ class GiscedataPolissa(osv.osv):
                 period = context.get('period')
                 if not period:
                     period = now.strftime('%Y%m')
-                body_personal = context.get('body_personal', '')
+                body_common = context.get('body', '')
+                body_personal = report.get('body', '')
                 channel_code = channel.channel_id.code
 
                 template_id = imd_obj.get_object_reference(
@@ -91,6 +92,7 @@ class GiscedataPolissa(osv.osv):
                 ctx = context.copy()
                 ctx.update({
                     'period': period,
+                    'body_common': body_common,
                     'body_personal': body_personal,
                     'empowering_channel': channel_code,
                     'src_rec_ids': [polissa.id],
