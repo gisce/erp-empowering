@@ -192,3 +192,27 @@ class EmpoweringModcontractualService(osv.osv):
     }
 
 EmpoweringModcontractualService()
+
+
+class EmpoweringCchPushLog(osv.osv):
+    _name = 'empowering.cch.push.log'
+
+    _columns = {
+        'start_date': fields.datetime('Push start date',
+            required=True),
+        'end_date': fields.datetime('Push end date',
+            required=True),
+        'contracts': fields.integer('Number of contracts',
+            required=True),
+        'measurements': fields.integer('Number of measurements',
+            required=True),
+        'status': fields.selection([
+            ('done', 'Done'),
+            ('failed', 'Failed')], 'Status',
+            required=True),
+        'message': fields.char('Message', size=512)
+    }
+
+    _order = 'start_date desc'
+
+EmpoweringCchPushLog()
