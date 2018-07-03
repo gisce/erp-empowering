@@ -35,6 +35,7 @@ class GiscedataPolissa(osv.osv):
         pe_send_obj = self.pool.get('poweremail.send.wizard')
         imd_obj = self.pool.get('ir.model.data')
         attach_obj = self.pool.get('ir.attachment')
+        tmpl_obj = self.pool.get('poweremail.templates')
 
         for report in reports:
             polissa = self.browse(cursor, uid, report['contract_id'],
@@ -89,6 +90,8 @@ class GiscedataPolissa(osv.osv):
                     cursor, uid, 'empowering_customize', 'env_empowering_report'
                 )[1]
 
+                tmpl = tmpl_obj.browse(cursor, uid, template_id)
+
                 ctx = context.copy()
                 ctx.update({
                     'period': period,
@@ -109,7 +112,8 @@ class GiscedataPolissa(osv.osv):
                 )
                 send_id = pe_send_obj.create(cursor, uid, {}, context=ctx)
                 pe_send_obj.write(cursor, uid, [send_id],
-                    {'attachment_ids': [(6, 0, [attachment_id])]}, context=ctx)
+                    {'from': tmpl.enforce_from_account.id,
+                     'attachment_ids': [(6, 0, [attachment_id])]}, context=ctx)
                 sender = pe_send_obj.browse(cursor, uid, send_id, context=ctx)
                 sender.send_mail(context=ctx)
 
