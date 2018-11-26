@@ -16,9 +16,9 @@ class GiscedataLecturesComptador(osv.osv):
         return len(upd_ids)
 
     _columns = {
-        'empowering_last_measure': fields.datetime('Last meassure sent')
-        'empowering_last_f5d_measure': fields.datetime('Last meassure sent')
-        'empowering_last_p5d_measure': fields.datetime('Last meassure sent')
+        'empowering_last_measure': fields.datetime('Last F1 meassure sent'),
+        'empowering_last_f5d_measure': fields.datetime('Last F5D meassure sent'),
+        'empowering_last_p5d_measure': fields.datetime('Last P5D meassure sent')
     }
 
 GiscedataLecturesComptador()
