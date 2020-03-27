@@ -1,4 +1,6 @@
 from osv import osv, fields
+from addons import get_module_resource
+
 
 class GiscedataLecturesComptador(osv.osv):
     _name = 'giscedata.lectures.comptador'
@@ -14,6 +16,17 @@ class GiscedataLecturesComptador(osv.osv):
             type_measure: last_measure
         })
         return len(upd_ids)
+
+    def get_aggregated_measures(self, cursor, uid, ids, date_start):
+        sql_path = get_module_resource(
+            'empowering_api', 'sql', 'aggregated_measures.sql'
+        )
+        with open(sql_path, 'r') as f:
+            cursor.execute(f.read(), {
+                'ids': tuple(ids), 'date_start': date_start
+            })
+        result = cursor.dictfetchall()
+        return result
 
     _columns = {
         'empowering_last_measure': fields.datetime('Last F1 meassure sent'),
