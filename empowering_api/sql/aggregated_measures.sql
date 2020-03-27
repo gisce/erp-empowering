@@ -4,7 +4,8 @@ select
   cups,
   timestamp,
   tarifa,
-  json_agg(json_build_object(period, value, 'tipus', tipus) order by period, tipus) as measures
+  case when substring(tarifa from 1 for 1) = '2' then 'R' else 'T' end as resource,
+  json_agg(json_build_object(lower(period), value, 'tipus', tipus) order by period, tipus) as measures
 from (
     select
         cups.name as cups,
@@ -45,7 +46,7 @@ from (
     where c.id in %(ids)s
 
 ) as foo
-where timestamp >= %(start_date)s
-group by cups, id, timestamp, tarifa
-order by id, timestamp
+where timestamp >= %(date_start)s
+group by cups, meter_id, timestamp, tarifa
+order by meter_id, timestamp
 
