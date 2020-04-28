@@ -23,6 +23,9 @@ class GiscedataPolissa(osv.osv):
             res[row[0]] = row[1]
         return res
 
+    def get_empowering_custom_fields(self, cursor, uid, polissa_id, context=None):
+        return {}
+
     _columns = {
         'etag': fields.char('ETag', size=50),
         'empowering_last_invoice_measure': fields.function(
