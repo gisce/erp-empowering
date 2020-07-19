@@ -40,6 +40,7 @@ class GiscedataPolissa(osv.osv):
 
     _columns = {
         'etag': fields.char('ETag', size=50),
+        'empowering_last_push': fields.datetime('Last push'),
         'empowering_last_invoice_measure': fields.function(
             _fnc_empowering_last_invoice_measure, type='datetime', method=True,
             string='Last F1 meassure sent'

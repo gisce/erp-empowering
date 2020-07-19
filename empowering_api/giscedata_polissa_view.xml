@@ -10,6 +10,7 @@
                  <xpath expr="//notebook" position="inside">
                      <page string="Empowering" attrs="{'invisible': [('etag', '=', False)]}">
                          <field name="etag" readonly="1"/>
+                         <field name="empowering_last_push" readonly="1"/>
                          <field name="empowering_last_invoice_measure" readonly="1"/>
                          <field name="empowering_last_profile_measure" readonly="1"/>
                      </page>
