@@ -46,7 +46,7 @@ from (
     where c.id in %(ids)s
 
 ) as foo
-where timestamp >= %(date_start)s
+where timestamp > %(date_start)s
 group by cups, meter_id, timestamp, tarifa
 order by meter_id, timestamp
 
