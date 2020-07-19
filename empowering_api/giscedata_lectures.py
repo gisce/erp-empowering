@@ -6,6 +6,19 @@ class GiscedataLecturesComptador(osv.osv):
     _name = 'giscedata.lectures.comptador'
     _inherit = 'giscedata.lectures.comptador'
 
+    def copy_data(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        default.update({
+            'empowering_last_measure': False,
+            'empowering_last_f5d_measure': False,
+            'empowering_last_p5d_measure': False
+        })
+        res = super(GiscedataLecturesComptador, self).copy_data(
+            cr, uid, id, default, context
+        )
+        return res
+
     def update_empowering_measure(self, cursor, uid, ids, last_measure, type_measure):
         upd_ids = []
         for comp in self.read(cursor, uid, ids, [type_measure]):

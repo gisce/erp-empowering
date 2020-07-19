@@ -7,6 +7,18 @@ class GiscedataPolissa(osv.osv):
     _name = 'giscedata.polissa'
     _inherit = 'giscedata.polissa'
 
+    def copy_data(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        default.update({
+            'etag': False,
+            'empowering_last_profile_measure': False
+        })
+        res = super(GiscedataPolissa, self).copy_data(
+            cr, uid, id, default, context
+        )
+        return res
+
     def _fnc_empowering_last_invoice_measure(self, cursor, uid, ids, field_name, arg, context=None):
         if not context:
             context = {}
