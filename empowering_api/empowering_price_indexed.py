@@ -12,7 +12,7 @@ class EmpoweringPriceIndexed(osv.osv):
         'empowering_price_indexed_last_push': fields.datetime("Last indexed group data push"),
     }
 
-    _sql_constraints = [('name_uniq', 'unique (tariff_id, cost)', u'Duplicated empowering price indexed group')]
+    _sql_constraints = [('name_uniq', 'unique (tariff_id, tariff_cost_id)', u'Duplicated empowering price indexed group')]
 
 EmpoweringPriceIndexed()
 
