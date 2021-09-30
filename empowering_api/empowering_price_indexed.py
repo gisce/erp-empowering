@@ -8,7 +8,7 @@ class EmpoweringPriceIndexed(osv.osv):
     _columns = {
         'etag': fields.char('ETag', size=50),
         'tariff_id': fields.char('Tariff', size=64, required=True),
-        'cost': fields.integer('FEE', required=True),
+        'tariff_cost_id': fields.char('FEE', size=64, required=True),
         'empowering_price_indexed_last_push': fields.datetime("Last indexed group data push"),
     }
 
